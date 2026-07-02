@@ -191,14 +191,19 @@ static const char* getWslg(FFstrbuf* result) {
         return "Failed to read /mnt/wslg/versions.txt";
     }
 
-    if (!ffStrbufStartsWithS(result, "WSLg ")) {
-        return "Failed to find WSLg version";
+    if (ffStrbufStartsWithS(result, "WSLg: ")) { // WSL 2.9.3+
+        ffStrbufSubstrBeforeFirstC(result, '\n');
+        ffStrbufSubstrAfter(result, (uint32_t) (strlen("WSLg: ") - 1));
+    } else if (ffStrbufStartsWithS(result, "WSLg ")) {
+        ffStrbufSubstrBeforeFirstC(result, '\n');
+        ffStrbufSubstrBeforeFirstC(result, '+');
+        ffStrbufSubstrAfterFirstC(result, ':');
+        ffStrbufTrimLeft(result, ' ');
+    } else {
+        ffStrbufClear(result);
+        return "Failed to parse WSLg version from /mnt/wslg/versions.txt";
     }
 
-    ffStrbufSubstrBeforeFirstC(result, '\n');
-    ffStrbufSubstrBeforeFirstC(result, '+');
-    ffStrbufSubstrAfterFirstC(result, ':');
-    ffStrbufTrimLeft(result, ' ');
     return NULL;
 }
     #endif
