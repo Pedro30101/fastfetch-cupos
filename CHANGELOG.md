@@ -1,16 +1,17 @@
 # 2.65.3
 
 Changes:
-* Fixes compatibility with WSL 2.9.3 (#2433, WM, Linux)
+* Fixed compatibility with WSL 2.9.3 (#2433, WM, Linux)
 
 Features:
-* Adds Astra Linux version detection (OS, Linux)
-* Improves performance of Windows PowerShell version detection (Shell, Windows)
-* Improves performance of Media module on macOS (Media, macOS)
+* Added Astra Linux version detection (OS, Linux)
+* Improved performance of Windows PowerShell version detection (Shell, Windows)
+* Improved performance of Media module on macOS (Media, macOS)
 
 Logos:
-* Adds Flatcar, Azure Linux
-* Adds Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
+* Added Flatcar, Azure Linux
+* Added Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
+* Cleaned up a lot of distro names
 
 # 2.65.2
 
