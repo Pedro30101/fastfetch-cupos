@@ -332,7 +332,9 @@ FF_A_UNUSED static void detectDeepinEnhancement(FFOSResult* result) {
 
 FF_A_UNUSED static void detectAstraVersion(FFOSResult* result) {
     // `PRETTY_NAME` is just `Astra Linux`; the version is in `VERSION_ID`, e.g. `2.12_x86-64`
-    ffStrbufAppendSUntilC(&result->version, result->versionID.chars, '_');
+    if (result->version.length == 0) { // Should be empty. Just in case
+        ffStrbufAppendSUntilC(&result->version, result->versionID.chars, '_');
+    }
     if (result->version.length > 0) {
         ffStrbufAppendC(&result->prettyName, ' ');
         ffStrbufAppend(&result->prettyName, &result->version);
