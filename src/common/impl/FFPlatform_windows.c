@@ -243,30 +243,9 @@ static void getSystemArchitecture(FFPlatformSysinfo* info) {
         case PROCESSOR_ARCHITECTURE_IA64:
             ffStrbufSetStatic(&info->architecture, "ia64");
             break;
-        case PROCESSOR_ARCHITECTURE_INTEL: {
-#ifdef __i386__
-            SYSTEM_PROCESSOR_INFORMATION spi;
-            if (NT_SUCCESS(NtQuerySystemInformation(SystemProcessorInformation, &spi, sizeof(spi), NULL))) {
-                switch (spi.ProcessorLevel) {
-                    case 4:
-                        ffStrbufSetStatic(&info->architecture, "i486");
-                        break;
-                    case 5:
-                        ffStrbufSetStatic(&info->architecture, "i586");
-                        break;
-                    case 6:
-                        ffStrbufSetStatic(&info->architecture, "i686");
-                        break;
-                    default:
-                        ffStrbufSetStatic(&info->architecture, "i386");
-                        break;
-                }
-            }
-#else
-            ffStrbufSetStatic(&info->architecture, "i386");
-#endif
+        case PROCESSOR_ARCHITECTURE_INTEL:
+            ffStrbufSetStatic(&info->architecture, "i686");
             break;
-        }
         case PROCESSOR_ARCHITECTURE_ARM64:
             ffStrbufSetStatic(&info->architecture, "aarch64");
             break;
