@@ -106,7 +106,7 @@ __attribute__((destructor, no_instrument_function)) void trace_fini() {
         fprintf(trace_file, "{\"name\":\"%s\",\"ph\":\"%c\",\"pid\":%" PRIu32 ",\"tid\":%" PRIu64 ",\"ts\":%" PRIu64 "}%c\n", fnName, is_exit ? 'E' : 'B', pid, tid, ts, i < count - 1 ? ',' : ' ');
     }
 
-    fputs("\n]\n", trace_file);
+    fputc(']', trace_file);
     fclose(trace_file);
     fprintf(stderr, "Trace written to trace_%d.json with %u events. Use https://ui.perfetto.dev/ to view it.\n", pid, count);
 
