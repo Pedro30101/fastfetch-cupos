@@ -1,3 +1,17 @@
+# 2.65.3
+
+Changes:
+* Fixes compatibility with WSL 2.9.3 (#2433, WM, Linux)
+
+Features:
+* Adds Astra Linux version detection (OS, Linux)
+* Improves performance of Windows PowerShell version detection (Shell, Windows)
+* Improves performance of Media module on macOS (Media, macOS)
+
+Logos:
+* Adds Flatcar, Azure Linux
+* Adds Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
+
 # 2.65.2
 
 Changes:
@@ -10,7 +24,7 @@ Bugfixes:
 * Fixed a crash when detecting hardware codec support with the `amdgpu` driver on Linux. (#2419, Codec, Linux)
 
 Logos:
-* Updated CachyOS_small
+* Updated CachyOS_small; fixed CachyOS logo colors to match the official logo better
 * Added Turkish
 
 # 2.65.1
