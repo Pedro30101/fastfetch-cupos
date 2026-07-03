@@ -122,10 +122,14 @@ __attribute__((no_instrument_function)) static void write_event(void* this_fn, b
     }
 
     events[idx].ts = get_time_us();
-#if _WIN32
+#if ENABLE_THREADS
+    #if _WIN32
     events[idx].tid = (uint64_t) GetCurrentThreadId();
-#else
+    #else
     events[idx].tid = (uint64_t) (uintptr_t) pthread_self();
+    #endif
+#else
+    events[idx].tid = 0;
 #endif
     events[idx].func = this_fn;
     if (is_exit) {
