@@ -876,6 +876,31 @@ static const FFlogo A[] = {
         },
     },
     #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_AZURELINUX
+    // AzureLinux
+    {
+        .names = { "AzureLinux" },
+        .lines = FASTFETCH_DATATEXT_LOGO_AZURELINUX,
+        .colors = {
+            FF_COLOR_FG_GREEN,
+            FF_COLOR_FG_BLUE,
+            FF_COLOR_FG_WHITE, // konsole...
+        },
+    },
+    #endif
+    #ifdef FASTFETCH_DATATEXT_LOGO_AZURELINUX2
+    // AzureLinux2
+    {
+        .names = { "AzureLinux2" },
+        .type = FF_LOGO_LINE_TYPE_ALTER_BIT,
+        .lines = FASTFETCH_DATATEXT_LOGO_AZURELINUX2,
+        .colors = {
+            FF_COLOR_FG_GREEN,
+            FF_COLOR_FG_BLUE,
+            FF_COLOR_FG_WHITE, // konsole...
+        },
+    },
+    #endif
     // LAST
     {},
 };
