@@ -804,7 +804,7 @@ static const FFlogo A[] = {
     #ifdef FASTFETCH_DATATEXT_LOGO_JANUSLINUX
     // Ataraxia
     {
-        .names = { "Ataraxia Linux", "Ataraxia" },
+        .names = { "Ataraxia" }, // New name of JanusLinux
         .lines = FASTFETCH_DATATEXT_LOGO_JANUSLINUX,
         .colors = {
             FF_COLOR_FG_BLUE,

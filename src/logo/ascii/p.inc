@@ -184,7 +184,7 @@ static const FFlogo P[] = {
     #ifdef FASTFETCH_DATATEXT_LOGO_PEROPESIS
     // Peropesis
     {
-        .names = { "Peropesis", "Peropesis Linux" },
+        .names = { "Peropesis" },
         .lines = FASTFETCH_DATATEXT_LOGO_PEROPESIS,
         .colors = {
             FF_COLOR_FG_WHITE,
