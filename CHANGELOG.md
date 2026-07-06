@@ -11,6 +11,7 @@ Features:
 Logos:
 * Added Flatcar, Azure Linux
 * Added Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
+* Updated linuxmint_small
 * Cleaned up a lot of distro names
 
 # 2.65.2
