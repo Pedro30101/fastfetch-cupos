@@ -64,13 +64,14 @@ FFstrbuf ffStrbufCreateF(const char* format, ...) {
 }
 
 void ffStrbufEnsureFreeNoCheck(FFstrbuf* strbuf, uint32_t free) {
-    uint32_t allocate = strbuf->allocated;
-    if (allocate < FASTFETCH_STRBUF_DEFAULT_ALLOC) {
+    uint32_t allocate = strbuf->length + free;
+    if (allocate < FASTFETCH_STRBUF_DEFAULT_ALLOC) { // `<` for null terminator
         allocate = FASTFETCH_STRBUF_DEFAULT_ALLOC;
-    }
-
-    while ((strbuf->length + free + 1) > allocate) { // + 1 for the null byte
-        allocate *= 2;
+    } else {
+        // Round up to the next power of 2.
+        // If the value is already a power of 2, it will be rounded up to the next power of 2.
+        assert(allocate < (UINT32_MAX >> 1));
+        allocate = 1U << (32 - __builtin_clz(allocate));
     }
 
     if (strbuf->allocated == 0) {
