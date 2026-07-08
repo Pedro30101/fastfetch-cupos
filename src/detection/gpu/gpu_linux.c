@@ -419,17 +419,17 @@ static const char* detectPci(const FFGPUOptions* options, FFlist* gpus, FFstrbuf
         if (!ok) {
             pciDetectAmdSpecific(options, gpu, deviceDir, buffer);
             ffStrbufSubstrBefore(deviceDir, drmDirPathLength);
-
-            ffStrbufAppendS(deviceDir, "/revision");
-            if (ffReadFileBuffer(deviceDir->chars, buffer)) {
-                char* pend;
-                uint64_t revision = strtoul(buffer->chars, &pend, 16);
-                if (pend != buffer->chars) {
-                    ffGPUQueryAmdGpuName((uint16_t) deviceId, (uint8_t) revision, gpu);
-                }
-            }
-            ffStrbufSubstrBefore(deviceDir, drmDirPathLength);
         }
+
+        ffStrbufAppendS(deviceDir, "/revision");
+        if (ffReadFileBuffer(deviceDir->chars, buffer)) {
+            char* pend;
+            uint64_t revision = strtoul(buffer->chars, &pend, 16);
+            if (pend != buffer->chars) {
+                ffGPUQueryAmdGpuName((uint16_t) deviceId, (uint8_t) revision, gpu);
+            }
+        }
+        ffStrbufSubstrBefore(deviceDir, drmDirPathLength);
     } else if (gpu->vendor.chars == FF_GPU_VENDOR_NAME_INTEL) {
         pciDetectIntelSpecific(options, gpu, deviceDir, buffer, drmKey);
         ffStrbufSubstrBefore(deviceDir, drmDirPathLength);
