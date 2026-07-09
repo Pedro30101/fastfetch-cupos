@@ -306,7 +306,11 @@ const char* ffDrmDetectAsahi(FFGPUResult* gpu, int fd) {
                                                   .size = sizeof(paramsGlobal),
                                               }) >= 0) {
         // They removed `unstable_uabi_version` from the struct. Hopefully they won't introduce new ABI changes.
-        gpu->coreCount = (int32_t) (paramsGlobal.num_clusters_total * paramsGlobal.num_cores_per_cluster);
+        assert(paramsGlobal.num_clusters_total <= DRM_ASAHI_MAX_CLUSTERS);
+        gpu->coreCount = 0;
+        for (uint32_t i = 0; i < paramsGlobal.num_clusters_total; i++) {
+            gpu->coreCount += __builtin_popcountll(paramsGlobal.core_masks[i]);
+        }
         gpu->frequency = paramsGlobal.max_frequency_khz / 1000;
         gpu->deviceId = ffGPUGeneral2Id(paramsGlobal.chip_id);
 
