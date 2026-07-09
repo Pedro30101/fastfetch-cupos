@@ -225,7 +225,7 @@ static void ffStrbufSetWS(FFstrbuf* strbuf, const char16_t* str) {
 static void closeDxgfd(void) {
     if (dxgfd >= 0) {
         close(dxgfd);
-        dxgfd = 0;
+        dxgfd = -2;
         FF_DEBUG("Closed /dev/dxg file descriptor");
     }
 }
@@ -294,7 +294,7 @@ ffGPUDetectWsl2
         });
         if (!NT_SUCCESS(status)) {
             FF_DEBUG("KMTQAITYPE_ADAPTERTYPE query failed for adapter #%u: %s", i, ffDebugNtStatus(status));
-            continue;
+            goto close_adapter;
         }
         if (adapterType.SoftwareDevice) {
             FF_DEBUG("Skipping software adapter #%u", i);
@@ -607,7 +607,7 @@ ffGPUDetectWsl2
         }
 
         if (gpu->type == FF_GPU_TYPE_UNKNOWN) {
-            if (ffGPUFillVendorByDeviceName(gpu)) {
+            if (ffGPUDetectTypeByVendorAndName(gpu)) {
                 // OK
             }
 #if _WIN32

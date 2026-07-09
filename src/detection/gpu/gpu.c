@@ -324,7 +324,7 @@ const char* ffDetectGPU(const FFGPUOptions* options, FFlist* result) {
     return "GPU detection failed";
 }
 
-bool ffGPUFillVendorByDeviceName(FFGPUResult* gpu) {
+bool ffGPUDetectTypeByVendorAndName(FFGPUResult* gpu) {
     if (gpu->type != FF_GPU_TYPE_UNKNOWN) {
         return true;
     }

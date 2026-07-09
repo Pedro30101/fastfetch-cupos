@@ -107,4 +107,4 @@ static inline uint64_t ffGPUGeneral2Id(uint64_t originalId) {
     return (1ULL << 63) | originalId;
 }
 
-bool ffGPUFillVendorByDeviceName(FFGPUResult* gpu);
+bool ffGPUDetectTypeByVendorAndName(FFGPUResult* gpu);
