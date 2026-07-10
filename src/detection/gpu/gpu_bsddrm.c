@@ -1,6 +1,7 @@
+#include "gpu.h"
+
 #if FF_HAVE_DRM
 
-    #include "gpu.h"
     #include "common/strutil.h"
     #include "common/io.h"
 
