@@ -105,12 +105,12 @@ static void resetConsole(void) {
 }
 
 #ifdef _WIN32
-BOOL WINAPI consoleHandler(FF_A_UNUSED DWORD signal) {
+BOOL WINAPI consoleHandler([[maybe_unused]] DWORD signal) {
     resetConsole();
     exit(0);
 }
 #else
-static void exitSignalHandler(FF_A_UNUSED int signal) {
+static void exitSignalHandler([[maybe_unused]] int signal) {
     resetConsole();
     exit(0);
 }

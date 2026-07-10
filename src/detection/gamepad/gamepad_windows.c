@@ -85,7 +85,7 @@ const char* ffDetectGamepad(FFlist* devices /* List of FFGamepadDevice */) {
     if (nDevices == 0) {
         return "No HID devices found";
     }
-    RAWINPUTDEVICELIST* FF_AUTO_FREE pRawInputDeviceList = (RAWINPUTDEVICELIST*) malloc(sizeof(RAWINPUTDEVICELIST) * nDevices);
+    FF_AUTO_FREE RAWINPUTDEVICELIST* pRawInputDeviceList = (RAWINPUTDEVICELIST*) malloc(sizeof(RAWINPUTDEVICELIST) * nDevices);
     if ((nDevices = GetRawInputDeviceList(pRawInputDeviceList, &nDevices, sizeof(RAWINPUTDEVICELIST))) == (UINT) -1) {
         return "GetRawInputDeviceList(pRawInputDeviceList) failed";
     }
@@ -122,7 +122,7 @@ const char* ffDetectGamepad(FFlist* devices /* List of FFGamepadDevice */) {
         if (knownGamepad) {
             ffStrbufSetS(&device->name, knownGamepad);
         }
-        HANDLE FF_AUTO_CLOSE_FD hHidFile = CreateFileW(devName, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, nullptr);
+        FF_AUTO_CLOSE_FD HANDLE hHidFile = CreateFileW(devName, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, nullptr);
         if (hHidFile == INVALID_HANDLE_VALUE) {
             if (!knownGamepad) {
                 ffStrbufSetF(&device->name, "Unknown gamepad %04X-%04X", (unsigned) rdi.hid.dwVendorId, (unsigned) rdi.hid.dwProductId);

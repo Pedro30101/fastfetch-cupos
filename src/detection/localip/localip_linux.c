@@ -982,7 +982,7 @@ const char* ffDetectLocalIps(const FFLocalIpOptions* options, FFlist* results) {
 #endif
 #if __sun
                 if (options->showType & FF_LOCALIP_TYPE_SPEED_BIT) {
-                    FF_A_CLEANUP(kstatFreeWrap) kstat_ctl_t* kc = kstat_open();
+                    [[gnu::cleanup(kstatFreeWrap)]] kstat_ctl_t* kc = kstat_open();
                     for (kstat_t* ks = kc->kc_chain; ks; ks = ks->ks_next) {
                         if (!ffStrEquals(ks->ks_class, "net") || !ffStrEquals(ks->ks_module, "link")) {
                             continue;

@@ -139,7 +139,7 @@ static void prepareModuleJsonObject(const char* type, yyjson_val* module) {
             if (ffStrEqualsIgnCase(type, FF_CPUUSAGE_MODULE_NAME)) {
                 ffPrepareCPUUsage();
             } else if (ffStrEqualsIgnCase(type, FF_COMMAND_MODULE_NAME)) {
-                FF_A_CLEANUP(ffDestroyCommandOptions) FFCommandOptions options;
+                [[gnu::cleanup(ffDestroyCommandOptions)]] FFCommandOptions options;
                 ffInitCommandOptions(&options);
                 if (module) {
                     ffCommandModuleInfo.parseJsonObject(&options, module);
@@ -154,7 +154,7 @@ static void prepareModuleJsonObject(const char* type, yyjson_val* module) {
         case 'd':
         case 'D': {
             if (ffStrEqualsIgnCase(type, FF_DISKIO_MODULE_NAME)) {
-                FF_A_CLEANUP(ffDestroyDiskIOOptions) FFDiskIOOptions options;
+                [[gnu::cleanup(ffDestroyDiskIOOptions)]] FFDiskIOOptions options;
                 ffInitDiskIOOptions(&options);
                 if (module) {
                     ffDiskIOModuleInfo.parseJsonObject(&options, module);
@@ -169,7 +169,7 @@ static void prepareModuleJsonObject(const char* type, yyjson_val* module) {
         case 'n':
         case 'N': {
             if (ffStrEqualsIgnCase(type, FF_NETIO_MODULE_NAME)) {
-                FF_A_CLEANUP(ffDestroyNetIOOptions) FFNetIOOptions options;
+                [[gnu::cleanup(ffDestroyNetIOOptions)]] FFNetIOOptions options;
                 ffInitNetIOOptions(&options);
                 if (module) {
                     ffNetIOModuleInfo.parseJsonObject(&options, module);
@@ -184,7 +184,7 @@ static void prepareModuleJsonObject(const char* type, yyjson_val* module) {
         case 'p':
         case 'P': {
             if (ffStrEqualsIgnCase(type, FF_PUBLICIP_MODULE_NAME)) {
-                FF_A_CLEANUP(ffDestroyPublicIpOptions) FFPublicIPOptions options;
+                [[gnu::cleanup(ffDestroyPublicIpOptions)]] FFPublicIPOptions options;
                 ffInitPublicIpOptions(&options);
                 if (module) {
                     ffPublicIPModuleInfo.parseJsonObject(&options, module);
@@ -199,7 +199,7 @@ static void prepareModuleJsonObject(const char* type, yyjson_val* module) {
         case 'w':
         case 'W': {
             if (ffStrEqualsIgnCase(type, FF_WEATHER_MODULE_NAME)) {
-                FF_A_CLEANUP(ffDestroyWeatherOptions) FFWeatherOptions options;
+                [[gnu::cleanup(ffDestroyWeatherOptions)]] FFWeatherOptions options;
                 ffInitWeatherOptions(&options);
                 if (module) {
                     ffWeatherModuleInfo.parseJsonObject(&options, module);

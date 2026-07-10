@@ -5,7 +5,7 @@
     #include "xdg-output-unstable-v1-client-protocol.h"
     #include "wp-color-management-v1-client-protocol.h"
 
-static void waylandOutputModeListener(void* data, FF_A_UNUSED struct wl_output* output, uint32_t flags, int32_t width, int32_t height, int32_t refreshRate) {
+static void waylandOutputModeListener(void* data, [[maybe_unused]] struct wl_output* output, uint32_t flags, int32_t width, int32_t height, int32_t refreshRate) {
     WaylandDisplay* display = data;
 
     if (flags & WL_OUTPUT_MODE_CURRENT) {
@@ -20,20 +20,20 @@ static void waylandOutputModeListener(void* data, FF_A_UNUSED struct wl_output* 
     }
 }
 
-static void waylandOutputScaleListener(void* data, FF_A_UNUSED struct wl_output* output, int32_t scale) {
+static void waylandOutputScaleListener(void* data, [[maybe_unused]] struct wl_output* output, int32_t scale) {
     WaylandDisplay* display = data;
     display->dpi = 96 * (uint32_t) scale;
 }
 
 static void waylandOutputGeometryListener(void* data,
-    FF_A_UNUSED struct wl_output* output,
-    FF_A_UNUSED int32_t x,
-    FF_A_UNUSED int32_t y,
+    [[maybe_unused]] struct wl_output* output,
+    [[maybe_unused]] int32_t x,
+    [[maybe_unused]] int32_t y,
     int32_t physical_width,
     int32_t physical_height,
-    FF_A_UNUSED int32_t subpixel,
-    FF_A_UNUSED const char* make,
-    FF_A_UNUSED const char* model,
+    [[maybe_unused]] int32_t subpixel,
+    [[maybe_unused]] const char* make,
+    [[maybe_unused]] const char* model,
     int32_t transform) {
     WaylandDisplay* display = data;
     display->physicalWidth = physical_width;
@@ -41,7 +41,7 @@ static void waylandOutputGeometryListener(void* data,
     display->transform = (enum wl_output_transform) transform;
 }
 
-static void handleXdgLogicalSize(void* data, FF_A_UNUSED struct zxdg_output_v1* _, int32_t width, FF_A_UNUSED int32_t height) {
+static void handleXdgLogicalSize(void* data, [[maybe_unused]] struct zxdg_output_v1* _, int32_t width, [[maybe_unused]] int32_t height) {
     WaylandDisplay* display = data;
     // Seems the values are only useful when ractional scale is enabled
     if (width < display->width) {
@@ -71,7 +71,7 @@ static struct zxdg_output_v1_listener zxdgOutputListener = {
     .description = (void*) ffWaylandOutputDescriptionListener,
 };
 
-static void handleWpTfNamed(void *data, FF_A_UNUSED struct wp_image_description_info_v1* wp_image_description_info_v1, uint32_t tf) {
+static void handleWpTfNamed(void *data, [[maybe_unused]] struct wp_image_description_info_v1* wp_image_description_info_v1, uint32_t tf) {
     // KDE reports `gamma 2.2` even in HDR mode, but it should be handled in KDE specific path
     WaylandDisplay* display = data;
     switch (tf) {

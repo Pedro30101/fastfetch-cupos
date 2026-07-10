@@ -157,7 +157,7 @@ bool ffWriteFileData(const char* fileName, size_t dataSize, const void* data) {
         }
     }
 
-    HANDLE FF_AUTO_CLOSE_FD handle = CreateFileW(fileNameW, GENERIC_WRITE, FILE_SHARE_WRITE, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    FF_AUTO_CLOSE_FD HANDLE handle = CreateFileW(fileNameW, GENERIC_WRITE, FILE_SHARE_WRITE, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (handle == INVALID_HANDLE_VALUE) {
         if (GetLastError() == ERROR_PATH_NOT_FOUND) {
             if (!createSubfolders(fileNameW)) {

@@ -145,7 +145,7 @@ void ffGenerateBluetoothRadioJsonConfig(FFBluetoothRadioOptions* options, yyjson
     ffJsonConfigGenerateModuleArgsConfig(doc, module, &options->moduleArgs);
 }
 
-bool ffGenerateBluetoothRadioJsonResult(FF_A_UNUSED FFBluetoothRadioOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
+bool ffGenerateBluetoothRadioJsonResult([[maybe_unused]] FFBluetoothRadioOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     FF_LIST_AUTO_DESTROY results = ffListCreate();
 
     const char* error = ffDetectBluetoothRadio(&results);

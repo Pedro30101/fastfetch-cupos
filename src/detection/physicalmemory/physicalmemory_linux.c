@@ -2,7 +2,7 @@
 #include "common/smbios.h"
 
 // 7.18
-typedef struct FFSmbiosMemoryDevice {
+typedef struct [[gnu::packed]] FFSmbiosMemoryDevice {
     FFSmbiosHeader Header;
 
     // 2.1+
@@ -59,7 +59,7 @@ typedef struct FFSmbiosMemoryDevice {
     uint16_t Pmic0RevisionNumber; // varies
     uint16_t RcdManufacturerID;   // varies
     uint16_t RcdRevisionNumber;   // varies
-} FF_A_PACKED FFSmbiosMemoryDevice;
+} FFSmbiosMemoryDevice;
 
 static_assert(offsetof(FFSmbiosMemoryDevice, RcdRevisionNumber) == 0x62,
     "FFSmbiosMemoryDevice: Wrong struct alignment");

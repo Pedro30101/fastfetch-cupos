@@ -546,11 +546,11 @@ static void detectArmName(FFstrbuf* cpuinfo, FFCPUResult* cpu, uint32_t implId) 
 static const char* parseCpuInfo(
     FFstrbuf* cpuinfo,
     FFCPUResult* cpu,
-    FF_A_UNUSED FFstrbuf* physicalCoresBuffer,
-    FF_A_UNUSED FFstrbuf* cpuMHz,
-    FF_A_UNUSED FFstrbuf* cpuIsa,
-    FF_A_UNUSED FFstrbuf* cpuUarch,
-    FF_A_UNUSED FFstrbuf* cpuImplementer) {
+    [[maybe_unused]] FFstrbuf* physicalCoresBuffer,
+    [[maybe_unused]] FFstrbuf* cpuMHz,
+    [[maybe_unused]] FFstrbuf* cpuIsa,
+    [[maybe_unused]] FFstrbuf* cpuUarch,
+    [[maybe_unused]] FFstrbuf* cpuImplementer) {
     char* line = nullptr;
     size_t len = 0;
 
@@ -681,7 +681,7 @@ static bool detectFrequency(FFCPUResult* cpu, const FFCPUOptions* options) {
 
 #if __i386__ || __x86_64__
 
-FF_A_UNUSED static uint16_t getPackageCount(FFstrbuf* cpuinfo) {
+[[maybe_unused]] static uint16_t getPackageCount(FFstrbuf* cpuinfo) {
     const char* p = cpuinfo->chars;
     uint64_t low = 0, high = 0;
 
@@ -700,7 +700,7 @@ FF_A_UNUSED static uint16_t getPackageCount(FFstrbuf* cpuinfo) {
     return (uint16_t) (__builtin_popcountll(low) + __builtin_popcountll(high));
 }
 
-FF_A_UNUSED static const char* detectCPUX86(const FFCPUOptions* options, FFCPUResult* cpu) {
+[[maybe_unused]] static const char* detectCPUX86(const FFCPUOptions* options, FFCPUResult* cpu) {
     FF_STRBUF_AUTO_DESTROY cpuinfo = ffStrbufCreateA(PROC_FILE_BUFFSIZ);
     if (!ffReadFileBuffer(FF_CPUINFO_PATH, &cpuinfo) || cpuinfo.length == 0) {
         return "ffReadFileBuffer(\"" FF_CPUINFO_PATH "\") failed";
@@ -813,7 +813,7 @@ static const char* detectPhysicalCores(FFCPUResult* cpu) {
     return nullptr;
 }
 
-FF_A_UNUSED static void parseIsa(FFstrbuf* cpuIsa) {
+[[maybe_unused]] static void parseIsa(FFstrbuf* cpuIsa) {
     // Always use the last part of the ISA string. Ref: #590 #1204
     ffStrbufSubstrAfterLastC(cpuIsa, ' ');
 
@@ -833,7 +833,7 @@ FF_A_UNUSED static void parseIsa(FFstrbuf* cpuIsa) {
     }
 }
 
-FF_A_UNUSED static void detectSocName(FFCPUResult* cpu) {
+[[maybe_unused]] static void detectSocName(FFCPUResult* cpu) {
     if (cpu->name.length > 0) {
         return;
     }
@@ -953,7 +953,7 @@ FF_A_UNUSED static void detectSocName(FFCPUResult* cpu) {
 }
 
     #ifdef __loongarch__
-FF_A_UNUSED static uint16_t getLoongarchPropCount(FFstrbuf* cpuinfo, const char* key) {
+[[maybe_unused]] static uint16_t getLoongarchPropCount(FFstrbuf* cpuinfo, const char* key) {
     const char* p = cpuinfo->chars;
     uint64_t low = 0, high = 0;
     uint32_t keylen = (uint32_t) strlen(key);
@@ -974,7 +974,7 @@ FF_A_UNUSED static uint16_t getLoongarchPropCount(FFstrbuf* cpuinfo, const char*
 }
     #endif
 
-FF_A_UNUSED static const char* detectCPUOthers(const FFCPUOptions* options, FFCPUResult* cpu) {
+[[maybe_unused]] static const char* detectCPUOthers(const FFCPUOptions* options, FFCPUResult* cpu) {
     cpu->coresLogical = (uint16_t) get_nprocs_conf();
     cpu->coresOnline = (uint16_t) get_nprocs();
 

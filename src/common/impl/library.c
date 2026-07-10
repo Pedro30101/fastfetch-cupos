@@ -108,7 +108,7 @@ void* ffLibraryLoadMulti(const char* path, int maxVersion, ...) {
 
 #if _WIN32
 
-void* dlopen(const char* path, FF_A_UNUSED int mode) {
+void* dlopen(const char* path, [[maybe_unused]] int mode) {
     wchar_t pathW[MAX_PATH + 1];
     ULONG pathWBytes = 0;
 

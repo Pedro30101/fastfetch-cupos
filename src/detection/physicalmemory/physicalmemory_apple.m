@@ -121,7 +121,7 @@ static const char* detectFromSystemProfiler(FFlist* result)
     return nullptr;
 }
 
-FF_A_UNUSED static const char* detectFromIokit(FFlist* result)
+[[maybe_unused]] static const char* detectFromIokit(FFlist* result)
 {
     FF_IOOBJECT_AUTO_RELEASE io_registry_entry_t entryDevice = IORegistryEntryFromPath(MACH_PORT_NULL, "IODeviceTree:/chosen");
     if (!entryDevice)
@@ -152,7 +152,7 @@ FF_A_UNUSED static const char* detectFromIokit(FFlist* result)
     return nullptr;
 }
 
-const char* ffDetectPhysicalMemory(FF_A_UNUSED FFPhysicalMemoryOptions* options, FFlist* result)
+const char* ffDetectPhysicalMemory([[maybe_unused]] FFPhysicalMemoryOptions* options, FFlist* result)
 {
     #if __aarch64__
     if (detectFromIokit(result) == nullptr)

@@ -275,7 +275,7 @@ const char* ffNetworkingRecvHttpResponse(FFNetworkingState* state, FFstrbuf* buf
     }
 
     FF_DEBUG("Starting data reception");
-    FF_A_UNUSED int recvCount = 0;
+    [[maybe_unused]] int recvCount = 0;
     uint32_t contentLength = 0;
     uint32_t headerEnd = 0;
 

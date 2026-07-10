@@ -314,7 +314,7 @@ static void detectPhysicalDisksByInterfaceClass(const char* type, const GUID* in
         return;
     }
 
-    wchar_t* FF_AUTO_FREE mszDeviceInterfaces = (wchar_t*) malloc(cchDeviceInterfaces * sizeof(wchar_t));
+    FF_AUTO_FREE wchar_t* mszDeviceInterfaces = (wchar_t*) malloc(cchDeviceInterfaces * sizeof(wchar_t));
     if (!mszDeviceInterfaces) {
         return;
     }
@@ -331,7 +331,7 @@ static void detectPhysicalDisksByInterfaceClass(const char* type, const GUID* in
     // MULTI_SZ: "str1\0str2\0...\0\0"
     for (const wchar_t* p = mszDeviceInterfaces; *p; p += wcslen(p) + 1) {
         FF_DEBUG("Probing %s: %ls", type, p);
-        FF_A_UNUSED const char* error = detectPhysicalDisk(type, p, result, options);
+        [[maybe_unused]] const char* error = detectPhysicalDisk(type, p, result, options);
         if (error == nullptr) {
             FF_DEBUG("Detected device \"%s\"", FF_LIST_LAST(FFPhysicalDiskResult, *result)->name.chars);
         } else {

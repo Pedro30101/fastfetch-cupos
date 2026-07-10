@@ -1,7 +1,5 @@
 #pragma once
 
-#include "common/attributes.h"
-
 #include <stdbool.h>
 #include <stdint.h>
 #include <assert.h>
@@ -32,24 +30,24 @@ static inline void ffListInitA(FFlist* list, uint32_t elementSize, uint32_t capa
     list->data = __builtin_expect(capacity == 0, 0) ? nullptr : (uint8_t*) malloc((size_t) capacity * elementSize);
 }
 
-FF_A_NODISCARD static inline FFlist ffListCreate() {
+[[nodiscard]] static inline FFlist ffListCreate() {
     FFlist result;
     ffListInit(&result);
     return result;
 }
 
-FF_A_NODISCARD static inline FFlist ffListCreateA(uint32_t elementSize, uint32_t capacity) {
+[[nodiscard]] static inline FFlist ffListCreateA(uint32_t elementSize, uint32_t capacity) {
     FFlist result;
     ffListInitA(&result, elementSize, capacity);
     return result;
 }
 
-FF_A_NODISCARD static inline void* ffListGet(const FFlist* list, uint32_t elementSize, uint32_t index) {
+[[nodiscard]] static inline void* ffListGet(const FFlist* list, uint32_t elementSize, uint32_t index) {
     assert(list->capacity > index);
     return list->data + (index * elementSize);
 }
 
-FF_A_NODISCARD static inline uint32_t ffListFirstIndexComp(const FFlist* list, uint32_t elementSize, void* compElement, bool (*compFunc)(const void*, const void*)) {
+[[nodiscard]] static inline uint32_t ffListFirstIndexComp(const FFlist* list, uint32_t elementSize, void* compElement, bool (*compFunc)(const void*, const void*)) {
     for (uint32_t i = 0; i < list->length; i++) {
         if (compFunc(ffListGet(list, elementSize, i), compElement)) {
             return i;
@@ -59,7 +57,7 @@ FF_A_NODISCARD static inline uint32_t ffListFirstIndexComp(const FFlist* list, u
     return list->length;
 }
 
-FF_A_NODISCARD static inline bool ffListContains(const FFlist* list, uint32_t elementSize, void* compElement, bool (*compFunc)(const void*, const void*)) {
+[[nodiscard]] static inline bool ffListContains(const FFlist* list, uint32_t elementSize, void* compElement, bool (*compFunc)(const void*, const void*)) {
     return ffListFirstIndexComp(list, elementSize, compElement, compFunc) != list->length;
 }
 
@@ -117,7 +115,7 @@ static inline void* ffListAdd(FFlist* list, uint32_t elementSize) {
         itemVarName - (itemType*) (listVar).data < (intptr_t) (listVar).length; \
         ++itemVarName)
 
-#define FF_LIST_AUTO_DESTROY FFlist FF_A_CLEANUP(ffListDestroy)
+#define FF_LIST_AUTO_DESTROY [[gnu::cleanup(ffListDestroy)]] FFlist
 
 #define FF_LIST_GET(itemType, listVar, index) \
     ({                                        \

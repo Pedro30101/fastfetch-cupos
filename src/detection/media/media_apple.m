@@ -9,10 +9,10 @@
 #import <CoreServices/CoreServices.h>
 
 // https://github.com/andrewwiik/iOS-Blocks/blob/master/Widgets/Music/MediaRemote.h
-extern void MRMediaRemoteGetNowPlayingInfo(dispatch_queue_t dispatcher, void (^callback)(_Nullable CFDictionaryRef info)) FF_A_WEAK_IMPORT;
-extern void MRMediaRemoteGetNowPlayingApplicationIsPlaying(dispatch_queue_t queue, void (^callback)(BOOL playing)) FF_A_WEAK_IMPORT;
-extern void MRMediaRemoteGetNowPlayingApplicationDisplayID(dispatch_queue_t queue, void (^callback)(_Nullable CFStringRef displayID)) FF_A_WEAK_IMPORT;
-extern void MRMediaRemoteGetNowPlayingApplicationDisplayName(int unknown, dispatch_queue_t queue, void (^callback)(_Nullable CFStringRef name)) FF_A_WEAK_IMPORT;
+[[clang::weak_import]] extern void MRMediaRemoteGetNowPlayingInfo(dispatch_queue_t dispatcher, void (^callback)(_Nullable CFDictionaryRef info));
+[[clang::weak_import]] extern void MRMediaRemoteGetNowPlayingApplicationIsPlaying(dispatch_queue_t queue, void (^callback)(BOOL playing));
+[[clang::weak_import]] extern void MRMediaRemoteGetNowPlayingApplicationDisplayID(dispatch_queue_t queue, void (^callback)(_Nullable CFStringRef displayID));
+[[clang::weak_import]] extern void MRMediaRemoteGetNowPlayingApplicationDisplayName(int unknown, dispatch_queue_t queue, void (^callback)(_Nullable CFStringRef name));
 
 static uint32_t getTrueElapsedTime(CFDictionaryRef info) {
     double elapsedTime;
@@ -111,7 +111,7 @@ static const char* getMediaByMediaRemote(FFMediaResult* result, bool saveCover) 
 }
 
 #if !FF_MODULE_DISABLE_MEDIA
-__attribute__((visibility("default"), used)) int ffPrintMediaByMediaRemote(int saveCover) {
+[[gnu::visibility("default"), gnu::used]] int ffPrintMediaByMediaRemote(int saveCover) {
     FFMediaResult media = {
         .status = ffStrbufCreate(),
         .song = ffStrbufCreate(),

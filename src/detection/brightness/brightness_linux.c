@@ -90,7 +90,7 @@ double ddca_set_default_sleep_multiplier(double multiplier); // ddcutil 1.4
 DDCA_Status ddca_init(const char* libopts, int syslog_level, int opts);
     #endif
 
-static const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+static const char* detectWithDdcci([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     FF_LIBRARY_LOAD_MESSAGE(libddcutil, "libddcutil" FF_LIBRARY_EXTENSION, 5);
     FF_LIBRARY_LOAD_SYMBOL_MESSAGE(libddcutil, ddca_get_display_info_list2)
     FF_LIBRARY_LOAD_SYMBOL_MESSAGE(libddcutil, ddca_open_display2)
@@ -158,7 +158,7 @@ static const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FFl
 }
 #endif
 
-const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+const char* ffDetectBrightness([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     detectWithBacklight(result);
 
 #ifdef FF_HAVE_DDCUTIL

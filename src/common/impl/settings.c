@@ -603,7 +603,7 @@ bool ffSettingsGetEnlightenmentProperty(ffEnlightenmentSettings* result) {
     return !!parsed;
 }
 #else
-bool ffSettingsGetEnlightenmentProperty(FF_A_UNUSED ffEnlightenmentSettings* result) {
+bool ffSettingsGetEnlightenmentProperty([[maybe_unused]] ffEnlightenmentSettings* result) {
     return false;
 }
 #endif

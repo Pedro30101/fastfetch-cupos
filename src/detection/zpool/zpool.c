@@ -85,7 +85,7 @@ const char* ffDetectZpool(FFlist* result /* list of FFZpoolResult */) {
         return "libzfs_init() failed";
     }
 
-    FF_A_CLEANUP(cleanLibzfs) FFZfsData data = {
+    [[gnu::cleanup(cleanLibzfs)]] FFZfsData data = {
         .handle = handle,
         .result = result,
     };
@@ -123,7 +123,7 @@ const char* ffDetectZpool(FFlist* result /* list of FFZpoolResult */) {
 
 #else
 
-const char* ffDetectZpool(FF_A_UNUSED FFlist* result) {
+const char* ffDetectZpool([[maybe_unused]] FFlist* result) {
     return "fastfetch was compiled without libzfs support";
 }
 

@@ -44,7 +44,7 @@ static inline void wrapYyjsonFree(yyjson_doc** doc) {
 }
 
 static const char* detectFromWTImpl(FFstrbuf* content, FFstrbuf* name, double* size) {
-    yyjson_doc* FF_A_CLEANUP(wrapYyjsonFree) doc = yyjson_read_opts(content->chars, content->length, YYJSON_READ_ALLOW_COMMENTS | YYJSON_READ_ALLOW_TRAILING_COMMAS, nullptr, nullptr);
+    [[gnu::cleanup(wrapYyjsonFree)]] yyjson_doc* doc = yyjson_read_opts(content->chars, content->length, YYJSON_READ_ALLOW_COMMENTS | YYJSON_READ_ALLOW_TRAILING_COMMAS, nullptr, nullptr);
     if (!doc) {
         return "Failed to parse WT JSON config file";
     }

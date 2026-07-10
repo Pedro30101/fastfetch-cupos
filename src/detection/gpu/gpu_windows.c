@@ -230,7 +230,7 @@ static void closeDxgfd(void) {
     }
 }
 
-FF_A_UNUSED static inline const char* ffDebugNtStatus(NTSTATUS status) {
+[[maybe_unused]] static inline const char* ffDebugNtStatus(NTSTATUS status) {
     return status < 0 ? strerror(-status) : "Success";
 }
 #endif
@@ -407,7 +407,7 @@ ffGPUDetectWsl2
         const char* dllName;
         if (options->driverSpecific && getDriverSpecificDetectionFn(gpu->vendor.chars, &detectFn, &dllName)) {
             FF_DEBUG("Calling driver-specific detection function for vendor: %s, DLL: %s", gpu->vendor.chars, dllName);
-            FF_A_UNUSED const char* error = detectFn(
+            [[maybe_unused]] const char* error = detectFn(
                 &(FFGpuDriverCondition) {
                     .type = FF_GPU_DRIVER_CONDITION_TYPE_LUID |
                         (deviceIds.DeviceIds.VendorID != -1u ? FF_GPU_DRIVER_CONDITION_TYPE_DEVICE_ID : 0) |
@@ -613,7 +613,7 @@ ffGPUDetectWsl2
 #if _WIN32
             else if (ffIsWindows10OrGreater()) {
                 const char* ffGPUDetectTypeWithDXCore(LUID adapterLuid, FFGPUResult * gpu);
-                FF_A_UNUSED const char* error = ffGPUDetectTypeWithDXCore(adapter->AdapterLuid, gpu);
+                [[maybe_unused]] const char* error = ffGPUDetectTypeWithDXCore(adapter->AdapterLuid, gpu);
                 FF_DEBUG("DXCore GPU type detection result: %s", error ?: "Success");
             }
 #endif

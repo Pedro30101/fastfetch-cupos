@@ -65,10 +65,10 @@ typedef struct FFKeyValuePair {
 
 const char* ffOptionTestPrefix(const char* argumentKey, const char* moduleName);
 void ffOptionParseString(const char* argumentKey, const char* value, FFstrbuf* buffer);
-FF_A_NODISCARD uint32_t ffOptionParseUInt32(const char* argumentKey, const char* value);
-FF_A_NODISCARD int32_t ffOptionParseInt32(const char* argumentKey, const char* value);
-FF_A_NODISCARD int ffOptionParseEnum(const char* argumentKey, const char* requestedKey, FFKeyValuePair pairs[]);
-FF_A_NODISCARD bool ffOptionParseBoolean(const char* str);
+[[nodiscard]] uint32_t ffOptionParseUInt32(const char* argumentKey, const char* value);
+[[nodiscard]] int32_t ffOptionParseInt32(const char* argumentKey, const char* value);
+[[nodiscard]] int ffOptionParseEnum(const char* argumentKey, const char* requestedKey, FFKeyValuePair pairs[]);
+[[nodiscard]] bool ffOptionParseBoolean(const char* str);
 void ffOptionParseColorNoClear(const char* value, FFstrbuf* buffer);
 static inline void ffOptionParseColor(const char* value, FFstrbuf* buffer) {
     ffStrbufClear(buffer);

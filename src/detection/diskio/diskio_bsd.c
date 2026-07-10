@@ -12,7 +12,7 @@
     #include <libgeom.h>
 
 const char* ffDiskIOGetIoCounters(FFlist* result, FFDiskIOOptions* options) {
-    FF_A_CLEANUP(geom_deletetree) struct gmesh geomTree = {};
+    [[gnu::cleanup(geom_deletetree)]] struct gmesh geomTree = {};
     if (geom_gettree(&geomTree) < 0) {
         return "geom_gettree() failed";
     }

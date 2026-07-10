@@ -1,6 +1,5 @@
 #pragma once
 
-#include "common/attributes.h"
 #include <assert.h>
 #include <unknwn.h>
 
@@ -20,4 +19,4 @@ static inline void ffReleaseComObject(void* ppUnknown) {
     }
 }
 
-#define FF_AUTO_RELEASE_COM_OBJECT FF_A_CLEANUP(ffReleaseComObject)
+#define FF_AUTO_RELEASE_COM_OBJECT [[gnu::cleanup(ffReleaseComObject)]]

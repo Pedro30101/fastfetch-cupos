@@ -294,7 +294,7 @@ void ffGenerateDisplayJsonConfig(FFDisplayOptions* options, yyjson_mut_doc* doc,
     }
 }
 
-bool ffGenerateDisplayJsonResult(FF_A_UNUSED FFDisplayOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
+bool ffGenerateDisplayJsonResult([[maybe_unused]] FFDisplayOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     const FFDisplayServerResult* dsResult = ffConnectDisplayServer();
 
     if (dsResult->displays.length == 0) {

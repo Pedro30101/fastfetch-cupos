@@ -14,7 +14,7 @@ static const char* getInfoByNqsi(FFlist* cpuTimes) {
         return "NtQuerySystemInformation(SystemProcessorPerformanceInformation, nullptr) failed";
     }
 
-    SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION* FF_AUTO_FREE pinfo = (SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION*) malloc(size);
+    FF_AUTO_FREE SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION* pinfo = (SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION*) malloc(size);
     if (!NT_SUCCESS(NtQuerySystemInformation(SystemProcessorPerformanceInformation, pinfo, size, &size))) {
         return "NtQuerySystemInformation(SystemProcessorPerformanceInformation, size) failed";
     }

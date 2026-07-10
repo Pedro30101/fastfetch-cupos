@@ -67,7 +67,7 @@ typedef enum FFSmbiosType : uint8_t {
 } FFSmbiosType;
 static_assert(sizeof(FFSmbiosType) == 1, "FFSmbiosType should be 1 byte");
 
-typedef struct FFSmbiosHeader {
+typedef struct [[gnu::packed]] FFSmbiosHeader {
     // Type of SMBIOS structure. Do NOT test `Type == FF_SMBIOS_END_OF_TABLE` to determine the end of the table,
     // as malformed tables may be missing the end-of-table marker.
     // **Use FFSmbiosHeaderTable[FF_SMBIOS_TYPE_END_OF_TABLE] pointer instead.**
@@ -79,7 +79,7 @@ typedef struct FFSmbiosHeader {
     // Not guaranteed to be consistent across reboots or even multiple reads of the same table.
     // Must be less than 0xFF00
     uint16_t Handle;
-} FF_A_PACKED FFSmbiosHeader;
+} FFSmbiosHeader;
 static_assert(sizeof(FFSmbiosHeader) == 4, "FFSmbiosHeader should be 4 bytes");
 
 static inline const char* ffSmbiosLocateString(const char* start, uint8_t index /* start from 1 */) {

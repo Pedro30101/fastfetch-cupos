@@ -143,7 +143,7 @@ static void fillUtmpIpAddr(FFUserResult* user, struct utmpx* n) {
     }
 }
 #else
-static void fillUtmpIpAddr(FF_A_UNUSED FFUserResult* user, FF_A_UNUSED struct utmpx* n) {
+static void fillUtmpIpAddr([[maybe_unused]] FFUserResult* user, [[maybe_unused]] struct utmpx* n) {
 }
 #endif
 

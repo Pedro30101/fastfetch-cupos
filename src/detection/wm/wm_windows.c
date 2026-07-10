@@ -117,7 +117,7 @@ static bool isProcessTrusted(DWORD processId, FFProcessType processType, UNICODE
 const char* ffDetectWMPlugin(FFstrbuf* pluginName) {
     alignas(UNICODE_STRING) uint8_t buffer[4096];
     UNICODE_STRING* filePath = (UNICODE_STRING*) buffer;
-    SYSTEM_PROCESS_INFORMATION* FF_AUTO_FREE pstart = nullptr;
+    FF_AUTO_FREE SYSTEM_PROCESS_INFORMATION* pstart = nullptr;
 
     // Multiple attempts in case processes change while
     // we are in the middle of querying them.
@@ -184,7 +184,7 @@ const char* ffDetectWMPlugin(FFstrbuf* pluginName) {
     return nullptr;
 }
 
-const char* ffDetectWMVersion(const FFstrbuf* wmName, FFstrbuf* result, FF_A_UNUSED FFWMOptions* options) {
+const char* ffDetectWMVersion(const FFstrbuf* wmName, FFstrbuf* result, [[maybe_unused]] FFWMOptions* options) {
     if (!wmName) {
         return "No WM detected";
     }

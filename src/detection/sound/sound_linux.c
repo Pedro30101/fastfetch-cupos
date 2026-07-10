@@ -11,7 +11,7 @@ struct DetectionInfoBundle {
     FFSoundOptions* options;
 };
 
-static void paSinkInfoCallback(FF_A_UNUSED pa_context* c, const pa_sink_info* i, int eol, void* userdata) {
+static void paSinkInfoCallback([[maybe_unused]] pa_context* c, const pa_sink_info* i, int eol, void* userdata) {
     if (eol > 0 || !i) {
         return;
     }
@@ -39,7 +39,7 @@ static void paSinkInfoCallback(FF_A_UNUSED pa_context* c, const pa_sink_info* i,
     device->type = (isMain ? FF_SOUND_TYPE_MAIN : FF_SOUND_TYPE_NONE) | (isActive ? FF_SOUND_TYPE_ACTIVE : FF_SOUND_TYPE_NONE);
 }
 
-static void paServerInfoCallback(FF_A_UNUSED pa_context* c, const pa_server_info* i, void* userdata) {
+static void paServerInfoCallback([[maybe_unused]] pa_context* c, const pa_server_info* i, void* userdata) {
     if (!i) {
         return;
     }

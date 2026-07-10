@@ -12,9 +12,9 @@
 #include <IOKit/IOKitLib.h>
 
 #ifdef MAC_OS_X_VERSION_10_15
-extern Boolean CoreDisplay_Display_SupportsHDRMode(CGDirectDisplayID display) FF_A_WEAK_IMPORT;
-extern Boolean CoreDisplay_Display_IsHDRModeEnabled(CGDirectDisplayID display) FF_A_WEAK_IMPORT;
-extern CFDictionaryRef CoreDisplay_DisplayCreateInfoDictionary(CGDirectDisplayID display) FF_A_WEAK_IMPORT;
+[[clang::weak_import]] extern Boolean CoreDisplay_Display_SupportsHDRMode(CGDirectDisplayID display);
+[[clang::weak_import]] extern Boolean CoreDisplay_Display_IsHDRModeEnabled(CGDirectDisplayID display);
+[[clang::weak_import]] extern CFDictionaryRef CoreDisplay_DisplayCreateInfoDictionary(CGDirectDisplayID display);
 #else
     #include <IOKit/graphics/IOGraphicsLib.h>
 #endif
@@ -50,7 +50,7 @@ static void detectDisplays(FFDisplayServerResult* ds) {
             }
 
             ffStrbufClear(&buffer);
-            CFDictionaryRef FF_CFTYPE_AUTO_RELEASE displayInfo = nullptr;
+            FF_CFTYPE_AUTO_RELEASE CFDictionaryRef displayInfo = nullptr;
 #ifdef MAC_OS_X_VERSION_10_15
             if (CoreDisplay_DisplayCreateInfoDictionary) {
                 displayInfo = CoreDisplay_DisplayCreateInfoDictionary(screen);

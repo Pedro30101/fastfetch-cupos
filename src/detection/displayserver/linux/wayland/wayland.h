@@ -75,8 +75,8 @@ inline static uint64_t ffWaylandGenerateIdFromName(const char* name) {
     return id;
 }
 
-void ffWaylandOutputNameListener(void* data, FF_A_UNUSED void* output, const char* name);
-void ffWaylandOutputDescriptionListener(void* data, FF_A_UNUSED void* output, const char* description);
+void ffWaylandOutputNameListener(void* data, [[maybe_unused]] void* output, const char* name);
+void ffWaylandOutputDescriptionListener(void* data, [[maybe_unused]] void* output, const char* description);
 // Modifies content of display. Don't call this function when calling ffdsAppendDisplay
 uint32_t ffWaylandHandleRotation(WaylandDisplay* display);
 

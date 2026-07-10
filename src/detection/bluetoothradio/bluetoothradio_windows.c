@@ -14,7 +14,7 @@
 #define IOCTL_BTH_GET_LOCAL_INFO BTH_CTL(BTH_IOCTL_BASE + 0x00)
 #define LMP_LE_SUPPORTED(x) ((x >> 38) & 1)
 
-typedef struct _BTH_RADIO_INFO {
+typedef struct [[gnu::packed]] _BTH_RADIO_INFO {
     // Supported LMP features of the radio.  Use LMP_XXX() to extract
     // the desired bits.
     ULONGLONG lmpSupportedFeatures;
@@ -27,9 +27,9 @@ typedef struct _BTH_RADIO_INFO {
 
     // LMP version
     UCHAR lmpVersion;
-} FF_A_PACKED BTH_RADIO_INFO;
+} BTH_RADIO_INFO;
 
-typedef struct _BTH_LOCAL_RADIO_INFO {
+typedef struct [[gnu::packed]] _BTH_LOCAL_RADIO_INFO {
     // Local BTH_ADDR, class of device, and radio name
     BTH_DEVICE_INFO localInfo;
 
@@ -44,7 +44,7 @@ typedef struct _BTH_LOCAL_RADIO_INFO {
 
     // More information about the local radio (LMP, MFG)
     BTH_RADIO_INFO radioInfo;
-} FF_A_PACKED BTH_LOCAL_RADIO_INFO;
+} BTH_LOCAL_RADIO_INFO;
 static_assert(sizeof(BTH_LOCAL_RADIO_INFO) == 292, "BTH_LOCAL_RADIO_INFO should be 292 bytes");
 
 #pragma GCC diagnostic ignored "-Wpointer-sign"

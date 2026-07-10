@@ -81,7 +81,7 @@ static const char* getSddmVersion(FFstrbuf* version) {
     return nullptr;
 }
 #else
-static const char* getSddmVersion(FF_A_UNUSED FFstrbuf* version) {
+static const char* getSddmVersion([[maybe_unused]] FFstrbuf* version) {
     return "Fastfetch is built without libz support";
 }
 #endif

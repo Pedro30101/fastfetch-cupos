@@ -22,7 +22,7 @@ static inline void wrapIoDestroyPlugInInterface(IOCFPlugInInterface*** pluginInf
 
 static const char* detectSsdTemp(io_service_t entryPhysical, double* temp) {
 #ifdef MAC_OS_X_VERSION_10_15
-    FF_A_CLEANUP(wrapIoDestroyPlugInInterface) IOCFPlugInInterface** pluginInf = nullptr;
+    [[gnu::cleanup(wrapIoDestroyPlugInInterface)]] IOCFPlugInInterface** pluginInf = nullptr;
     int32_t score;
     if (IOCreatePlugInInterfaceForService(entryPhysical, kIONVMeSMARTUserClientTypeID, kIOCFPlugInInterfaceID, &pluginInf, &score) != kIOReturnSuccess) {
         return "IOCreatePlugInInterfaceForService() failed";

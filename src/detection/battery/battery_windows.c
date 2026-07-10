@@ -51,7 +51,7 @@ static FFBatteryWmiEntry* getBatteryEntry(FFlist* entries, FFlist* results, ULON
 }
 
 static const char* queryWmiAllData(const GUID* guid, const char* guidStr, PWNODE_ALL_DATA* pAllData, ULONG* pBufferSize) {
-    FF_AUTO_CLOSE_WMI_BLOCK HANDLE hBlock = nullptr;
+    [[gnu::cleanup(ffCloseWmiBlock)]] HANDLE hBlock = nullptr;
     ULONG status = WmiOpenBlock(guid, WMIGUID_QUERY, &hBlock);
     if (status != ERROR_SUCCESS) {
         FF_DEBUG("WMI: WmiOpenBlock() failed for %s: %s", guidStr, ffDebugWin32Error(status));

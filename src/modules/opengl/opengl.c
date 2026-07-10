@@ -85,7 +85,7 @@ void ffGenerateOpenGLJsonConfig(FFOpenGLOptions* options, yyjson_mut_doc* doc, y
     }
 }
 
-bool ffGenerateOpenGLJsonResult(FF_A_UNUSED FFOpenGLOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
+bool ffGenerateOpenGLJsonResult([[maybe_unused]] FFOpenGLOptions* options, yyjson_mut_doc* doc, yyjson_mut_val* module) {
     bool success = false;
     FFOpenGLResult result;
     ffStrbufInit(&result.version);

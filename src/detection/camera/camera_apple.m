@@ -8,7 +8,7 @@
 
 #ifdef MAC_OS_VERSION_14_0
 // To make fastfetch compiled on newer macOS versions runs on older ones
-AVF_EXPORT FF_A_WEAK_IMPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal;
+[[clang::weak_import]] AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal;
 #endif
 
 const char* ffDetectCamera(FFlist* result)

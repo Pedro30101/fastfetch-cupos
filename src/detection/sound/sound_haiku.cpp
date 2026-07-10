@@ -7,7 +7,7 @@ extern "C" {
 #include <MediaRoster.h>
 #include <ParameterWeb.h>
 
-const char* ffDetectSound(FF_A_UNUSED FFSoundOptions* options, FFlist* devices /* List of FFSoundDevice */) {
+const char* ffDetectSound([[maybe_unused]] FFSoundOptions* options, FFlist* devices /* List of FFSoundDevice */) {
     BMediaRoster* roster = BMediaRoster::Roster();
     media_node mediaNode;
     live_node_info liveInfo;

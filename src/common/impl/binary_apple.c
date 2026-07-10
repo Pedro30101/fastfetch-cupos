@@ -273,7 +273,7 @@ const char* ffBinaryExtractStrings(const char* machoFile, bool (*cb)(const char*
         return "Failed to stat file";
     }
 
-    FF_A_CLEANUP(wrapMunmap) FFMemoryMapping mapping = {
+    [[gnu::cleanup(wrapMunmap)]] FFMemoryMapping mapping = {
         .data = mmap(nullptr, (size_t) st.st_size, PROT_READ, MAP_PRIVATE, fd, 0),
         .length = (size_t) st.st_size,
     };

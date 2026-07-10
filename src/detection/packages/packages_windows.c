@@ -92,7 +92,7 @@ static void detectScoop(FFPackagesResult* result) {
 
     yyjson_val* root = nullptr;
 
-    yyjson_doc* FF_A_CLEANUP(wrapYyjsonFree) doc = yyjson_read_file(scoopPath.chars, 0, nullptr, nullptr);
+    [[gnu::cleanup(wrapYyjsonFree)]] yyjson_doc* doc = yyjson_read_file(scoopPath.chars, 0, nullptr, nullptr);
     if (doc) {
         root = yyjson_doc_get_root(doc);
         if (!yyjson_is_obj(root)) {
@@ -131,7 +131,7 @@ static void detectScoop(FFPackagesResult* result) {
     }
 }
 
-static void detectChoco(FF_A_UNUSED FFPackagesResult* result) {
+static void detectChoco([[maybe_unused]] FFPackagesResult* result) {
     const char* chocoInstall = getenv("ChocolateyInstall");
     if (!chocoInstall || chocoInstall[0] == '\0') {
         return;

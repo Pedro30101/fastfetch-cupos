@@ -77,7 +77,7 @@ const char* detectThermalTemp(const FFCPUOptions* options, double* result) {
         }
     }
 
-    FF_A_CLEANUP(ffPerfCloseQueryHandle)
+    [[gnu::cleanup(ffPerfCloseQueryHandle)]]
     HANDLE hQuery = nullptr;
 
     if (PerfOpenQueryHandle(nullptr, &hQuery) != ERROR_SUCCESS) {
@@ -139,7 +139,7 @@ const char* detectThermalTemp(const FFCPUOptions* options, double* result) {
 }
 
 // 7.5
-typedef struct FFSmbiosProcessorInfo {
+typedef struct [[gnu::packed]] FFSmbiosProcessorInfo {
     FFSmbiosHeader Header;
 
     uint8_t SocketDesignation;     // string
@@ -181,7 +181,7 @@ typedef struct FFSmbiosProcessorInfo {
 
     // 3.6+
     uint16_t ThreadEnabled; // varies
-} FF_A_PACKED FFSmbiosProcessorInfo;
+} FFSmbiosProcessorInfo;
 
 static_assert(offsetof(FFSmbiosProcessorInfo, ThreadEnabled) == 0x30,
     "FFSmbiosProcessorInfo: Wrong struct alignment");
@@ -238,7 +238,7 @@ static const char* detectNCores(const FFCPUOptions* options, FFCPUResult* cpu) {
         return "GetLogicalProcessorInformationEx(RelationAll, nullptr, &length) failed";
     }
 
-    SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX* FF_AUTO_FREE
+    FF_AUTO_FREE SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*
         pProcessorInfo = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*) malloc(length);
 
     if (!NT_SUCCESS(NtQuerySystemInformationEx(SystemLogicalProcessorAndGroupInformation, &lpr, sizeof(lpr), pProcessorInfo, length, &length))) {

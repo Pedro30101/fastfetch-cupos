@@ -4,7 +4,7 @@
 #include <sys/module.h>
 #include <sys/param.h>
 
-typedef struct FF_A_PACKED FFNbsdModList {
+typedef struct [[gnu::packed]] FFNbsdModList {
     int len;
     modstat_t mods[];
 } FFNbsdModList;

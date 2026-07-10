@@ -2,13 +2,13 @@
 #include "logo/logo.h"
 #include "modules/break/break.h"
 
-bool ffPrintBreak(FF_A_UNUSED FFBreakOptions* options) {
+bool ffPrintBreak([[maybe_unused]] FFBreakOptions* options) {
     ffLogoPrintLine();
     putchar('\n');
     return true;
 }
 
-void ffParseBreakJsonObject(FF_A_UNUSED FFBreakOptions* options, FF_A_UNUSED yyjson_val* module) {
+void ffParseBreakJsonObject([[maybe_unused]] FFBreakOptions* options, [[maybe_unused]] yyjson_val* module) {
     yyjson_val *key, *val;
     size_t idx, max;
     yyjson_obj_foreach (module, idx, max, key, val) {
@@ -20,10 +20,10 @@ void ffParseBreakJsonObject(FF_A_UNUSED FFBreakOptions* options, FF_A_UNUSED yyj
     }
 }
 
-void ffInitBreakOptions(FF_A_UNUSED FFBreakOptions* options) {
+void ffInitBreakOptions([[maybe_unused]] FFBreakOptions* options) {
 }
 
-void ffDestroyBreakOptions(FF_A_UNUSED FFBreakOptions* options) {
+void ffDestroyBreakOptions([[maybe_unused]] FFBreakOptions* options) {
 }
 
 FFModuleBaseInfo ffBreakModuleInfo = {

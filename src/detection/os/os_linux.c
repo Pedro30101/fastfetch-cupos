@@ -34,7 +34,7 @@ static bool parseOsRelease(const char* fileName, FFOSResult* result) {
 }
 
 // Common logic for detecting Armbian image version
-FF_A_UNUSED static bool detectArmbianVersion(FFOSResult* result) {
+[[maybe_unused]] static bool detectArmbianVersion(FFOSResult* result) {
     // Possible values `PRETTY_NAME` starts with on Armbian:
     // - `Armbian` for official releases
     // - `Armbian_community` for community releases
@@ -55,7 +55,7 @@ FF_A_UNUSED static bool detectArmbianVersion(FFOSResult* result) {
 }
 
 // Returns false if PrettyName should be updated by caller
-FF_A_UNUSED static bool getUbuntuFlavour(FFOSResult* result) {
+[[maybe_unused]] static bool getUbuntuFlavour(FFOSResult* result) {
     if (detectArmbianVersion(result)) {
         return true;
     } else if (ffStrbufStartsWithS(&result->prettyName, "Linux Lite ")) {
@@ -177,7 +177,7 @@ FF_A_UNUSED static bool getUbuntuFlavour(FFOSResult* result) {
     return false;
 }
 
-FF_A_UNUSED static void getDebianVersion(FFOSResult* result) {
+[[maybe_unused]] static void getDebianVersion(FFOSResult* result) {
     FF_STRBUF_AUTO_DESTROY debianVersion = ffStrbufCreate();
     ffAppendFileBuffer("/etc/debian_version", &debianVersion);
     ffStrbufTrimRightSpace(&debianVersion);
@@ -190,7 +190,7 @@ FF_A_UNUSED static void getDebianVersion(FFOSResult* result) {
     ffStrbufSetF(&result->prettyName, "%s %s (%s)", result->name.chars, result->versionID.chars, result->codename.chars);
 }
 
-FF_A_UNUSED static bool detectDebianDerived(FFOSResult* result) {
+[[maybe_unused]] static bool detectDebianDerived(FFOSResult* result) {
     if (detectArmbianVersion(result)) {
         return true;
     } else if (ffStrbufStartsWithS(&result->name, "Loc-OS")) {
@@ -306,7 +306,7 @@ FF_A_UNUSED static bool detectDebianDerived(FFOSResult* result) {
     return false;
 }
 
-FF_A_UNUSED static bool detectFedoraVariant(FFOSResult* result) {
+[[maybe_unused]] static bool detectFedoraVariant(FFOSResult* result) {
     if (ffStrbufEqualS(&result->variantID, "coreos") || ffStrbufEqualS(&result->variantID, "kinoite") || ffStrbufEqualS(&result->variantID, "sericea") || ffStrbufEqualS(&result->variantID, "silverblue")) {
         ffStrbufAppendC(&result->id, '-');
         ffStrbufAppend(&result->id, &result->variantID);
@@ -316,7 +316,7 @@ FF_A_UNUSED static bool detectFedoraVariant(FFOSResult* result) {
     return false;
 }
 
-FF_A_UNUSED static bool detectBedrock(FFOSResult* os) {
+[[maybe_unused]] static bool detectBedrock(FFOSResult* os) {
     const char* bedrockRestrict = getenv("BEDROCK_RESTRICT");
     if (bedrockRestrict && bedrockRestrict[0] == '1') {
         return false;
@@ -324,7 +324,7 @@ FF_A_UNUSED static bool detectBedrock(FFOSResult* os) {
     return parseOsRelease(FASTFETCH_TARGET_DIR_ROOT "/bedrock/strata/bedrock/etc/os-release", os);
 }
 
-FF_A_UNUSED static void detectDeepinEnhancement(FFOSResult* result) {
+[[maybe_unused]] static void detectDeepinEnhancement(FFOSResult* result) {
     if (ffStrbufContainC(&result->prettyName, '(')) {
         return;
     }
@@ -352,7 +352,7 @@ FF_A_UNUSED static void detectDeepinEnhancement(FFOSResult* result) {
     }
 }
 
-FF_A_UNUSED static void detectAstraVersion(FFOSResult* result) {
+[[maybe_unused]] static void detectAstraVersion(FFOSResult* result) {
     // `PRETTY_NAME` is just `Astra Linux`; the version is in `VERSION_ID`, e.g. `2.12_x86-64`
     if (result->version.length == 0) { // Should be empty. Just in case
         ffStrbufAppendSUntilC(&result->version, result->versionID.chars, '_');

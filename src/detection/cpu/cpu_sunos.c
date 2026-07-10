@@ -99,7 +99,7 @@ static inline uint16_t countTypeId(kstat_ctl_t* kc, const char* type) {
 }
 
 const char* ffDetectCPUImpl(const FFCPUOptions* options, FFCPUResult* cpu) {
-    FF_A_CLEANUP(kstatFreeWrap) kstat_ctl_t* kc = kstat_open();
+    [[gnu::cleanup(kstatFreeWrap)]] kstat_ctl_t* kc = kstat_open();
     if (!kc) {
         return "kstat_open() failed";
     }

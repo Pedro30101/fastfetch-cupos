@@ -20,7 +20,7 @@ const char* ffDetectWifi(FFlist* result) {
         return "Starting `" FF_TERMUX_API_PATH " " FF_TERMUX_API_PARAM "` failed";
     }
 
-    yyjson_doc* FF_A_CLEANUP(wrapYyjsonFree) doc = yyjson_read_opts(buffer.chars, buffer.length, 0, nullptr, nullptr);
+    [[gnu::cleanup(wrapYyjsonFree)]] yyjson_doc* doc = yyjson_read_opts(buffer.chars, buffer.length, 0, nullptr, nullptr);
     if (!doc) {
         return "Failed to parse wifi connection info";
     }

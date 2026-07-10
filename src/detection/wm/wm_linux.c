@@ -7,11 +7,11 @@
 #include "common/strutil.h"
 #include "common/debug.h"
 
-const char* ffDetectWMPlugin(FF_A_UNUSED FFstrbuf* pluginName) {
+const char* ffDetectWMPlugin([[maybe_unused]] FFstrbuf* pluginName) {
     return "Not supported on this platform";
 }
 
-static bool extractCommonWmVersion(const char* line, FF_A_UNUSED uint32_t len, void* userdata) {
+static bool extractCommonWmVersion(const char* line, [[maybe_unused]] uint32_t len, void* userdata) {
     int count = 0;
     sscanf(line, "%*d.%*d.%*d%n", &count);
     if (count == 0) {
@@ -97,7 +97,7 @@ static const char* getHyprland(FFstrbuf* result) {
     return "Failed to run command `Hyprland --version`";
 }
 
-static bool extractSwayVersion(const char* line, FF_A_UNUSED uint32_t len, void* userdata) {
+static bool extractSwayVersion(const char* line, [[maybe_unused]] uint32_t len, void* userdata) {
     FFstrbuf* result = (FFstrbuf*) userdata;
     if (!ffStrStartsWith(line, "sway")) {
         return true;
@@ -210,7 +210,7 @@ static const char* getWslg(FFstrbuf* result) {
 
 #endif // !__ANDROID__
 
-static bool extractI3Version(const char* line, FF_A_UNUSED uint32_t len, void* userdata) {
+static bool extractI3Version(const char* line, [[maybe_unused]] uint32_t len, void* userdata) {
     int count = 0;
     sscanf(line, "%*d.%*d%n", &count);
     if (count == 0) {
@@ -305,7 +305,7 @@ static const char* getOpenbox(FFstrbuf* result) {
     return "Failed to run command `openbox --version`";
 }
 
-const char* ffDetectWMVersion(const FFstrbuf* wmName, FFstrbuf* result, FF_A_UNUSED FFWMOptions* options) {
+const char* ffDetectWMVersion(const FFstrbuf* wmName, FFstrbuf* result, [[maybe_unused]] FFWMOptions* options) {
     if (!wmName) {
         return "No WM detected";
     }

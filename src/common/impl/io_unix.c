@@ -34,7 +34,7 @@ bool ffWriteFileData(const char* fileName, size_t dataSize, const void* data) {
     int openFlagsModes = O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC;
     mode_t openFlagsRights = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
-    int FF_AUTO_CLOSE_FD fd = open(fileName, openFlagsModes, openFlagsRights);
+    FF_AUTO_CLOSE_FD int fd = open(fileName, openFlagsModes, openFlagsRights);
     if (fd == -1) {
         if (errno == ENOENT) {
             createSubfolders(fileName);

@@ -23,7 +23,7 @@ static const char* detectCpuTemp(const FFCPUOptions* options, double* current) {
         return "open(_PATH_SYSMON, O_RDONLY | O_CLOEXEC) failed";
     }
 
-    FF_A_CLEANUP(freePropDict) prop_dictionary_t root = nullptr;
+    [[gnu::cleanup(freePropDict)]] prop_dictionary_t root = nullptr;
     if (prop_dictionary_recv_ioctl(fd, ENVSYS_GETDICTIONARY, &root) < 0) {
         return "prop_dictionary_recv_ioctl(ENVSYS_GETDICTIONARY) failed";
     }

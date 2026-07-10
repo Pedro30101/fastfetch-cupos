@@ -66,7 +66,7 @@ static bool parseSmbiosTable(const uint8_t* data, uint32_t length) {
     const FFSmbiosHeader* endOfTable = nullptr;
 
     FF_DEBUG("Parsing SMBIOS table structures with length %u bytes", length);
-    FF_A_UNUSED int structureCount = 0, totalCount = 0;
+    [[maybe_unused]] int structureCount = 0, totalCount = 0;
     for (
         const FFSmbiosHeader* header = (const FFSmbiosHeader*) data;
         (const uint8_t*) header + sizeof(FFSmbiosHeader) < (const uint8_t*) data + length;
@@ -228,7 +228,7 @@ static bool readPhysicalMemory(int fd, off_t address, size_t length, void* buffe
     return true;
 }
 
-typedef struct FFSmbios20EntryPoint {
+typedef struct [[gnu::packed]] FFSmbios20EntryPoint {
     uint8_t AnchorString[4];
     uint8_t EntryPointStructureChecksum;
     uint8_t EntryPointLength;
@@ -243,11 +243,11 @@ typedef struct FFSmbios20EntryPoint {
     uint32_t StructureTableAddress;
     uint16_t NumberOfSmbiosStructures;
     uint8_t SmbiosBcdRevision;
-} FF_A_PACKED FFSmbios20EntryPoint;
+} FFSmbios20EntryPoint;
 static_assert(offsetof(FFSmbios20EntryPoint, SmbiosBcdRevision) == 0x1E,
     "FFSmbios20EntryPoint: Wrong struct alignment");
 
-typedef struct FFSmbios30EntryPoint {
+typedef struct [[gnu::packed]] FFSmbios30EntryPoint {
     uint8_t AnchorString[5];
     uint8_t EntryPointStructureChecksum;
     uint8_t EntryPointLength;
@@ -258,7 +258,7 @@ typedef struct FFSmbios30EntryPoint {
     uint8_t Reversed;
     uint32_t StructureTableMaximumSize;
     uint64_t StructureTableAddress;
-} FF_A_PACKED FFSmbios30EntryPoint;
+} FFSmbios30EntryPoint;
 
 static_assert(offsetof(FFSmbios30EntryPoint, StructureTableAddress) == 0x10,
     "FFSmbios30EntryPoint: Wrong struct alignment");

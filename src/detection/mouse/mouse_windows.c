@@ -18,7 +18,7 @@ const char* ffDetectMouse(FFlist* devices /* List of FFMouseDevice */) {
     if (nDevices == 0) {
         return "No HID devices found";
     }
-    RAWINPUTDEVICELIST* FF_AUTO_FREE pRawInputDeviceList = (RAWINPUTDEVICELIST*) malloc(sizeof(RAWINPUTDEVICELIST) * nDevices);
+    FF_AUTO_FREE RAWINPUTDEVICELIST* pRawInputDeviceList = (RAWINPUTDEVICELIST*) malloc(sizeof(RAWINPUTDEVICELIST) * nDevices);
     if ((nDevices = GetRawInputDeviceList(pRawInputDeviceList, &nDevices, sizeof(RAWINPUTDEVICELIST))) == (UINT) -1) {
         return "GetRawInputDeviceList(pRawInputDeviceList) failed";
     }
@@ -48,7 +48,7 @@ const char* ffDetectMouse(FFlist* devices /* List of FFMouseDevice */) {
 
         wchar_t buffer[MAX_PATH];
 
-        HANDLE FF_AUTO_CLOSE_FD hHidFile = CreateFileW(devName, 0 /* must be 0 instead of GENERIC_READ */, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
+        FF_AUTO_CLOSE_FD HANDLE hHidFile = CreateFileW(devName, 0 /* must be 0 instead of GENERIC_READ */, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
         if (hHidFile != INVALID_HANDLE_VALUE) {
             if (HidD_GetProductString(hHidFile, buffer, (ULONG) sizeof(buffer))) {
                 ffStrbufSetWS(&device->name, buffer);

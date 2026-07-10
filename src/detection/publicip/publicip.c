@@ -78,7 +78,7 @@ const char* ffDetectPublicIp(FFPublicIPOptions* options, FFPublicIpResult* resul
     }
 
     if (options->url.length == 0) {
-        yyjson_doc* FF_A_CLEANUP(wrapYyjsonFree) doc = yyjson_read_opts(response.chars, response.length, 0, nullptr, nullptr);
+        [[gnu::cleanup(wrapYyjsonFree)]] yyjson_doc* doc = yyjson_read_opts(response.chars, response.length, 0, nullptr, nullptr);
         if (doc) {
             yyjson_val* root = yyjson_doc_get_root(doc);
             ffStrbufAppendJsonVal(&result->ip, yyjson_obj_get(root, "ip"));

@@ -19,7 +19,7 @@
     #include <IOKit/IOKitLib.h>
 #endif
 
-typedef struct FFSmbiosBios {
+typedef struct [[gnu::packed]] FFSmbiosBios {
     FFSmbiosHeader Header;
 
     uint8_t Vendor;                      // string
@@ -38,7 +38,7 @@ typedef struct FFSmbiosBios {
 
     // 3.1+
     uint16_t ExtendedBiosRomSize; // bit field
-} FF_A_PACKED FFSmbiosBios;
+} FFSmbiosBios;
 
 static_assert(offsetof(FFSmbiosBios, ExtendedBiosRomSize) == 0x18,
     "FFSmbiosBios: Wrong struct alignment");

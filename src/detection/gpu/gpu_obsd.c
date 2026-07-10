@@ -27,7 +27,7 @@ static inline int pciReadConf(int fd, uint8_t bus, uint8_t device, uint8_t func,
     return 0;
 }
 
-const char* detectByPci(FF_A_UNUSED const FFGPUOptions* options, FFlist* gpus) {
+const char* detectByPci([[maybe_unused]] const FFGPUOptions* options, FFlist* gpus) {
     char pciDevPath[] = "/dev/pci0";
     FF_AUTO_CLOSE_FD int pcifd = open(pciDevPath, O_RDONLY | O_CLOEXEC);
     if (pcifd < 0) {

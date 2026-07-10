@@ -6,7 +6,7 @@
 #include "common/debug.h"
 
 // Helper function to convert ADL status code to string
-FF_A_UNUSED static const char* ffAdlStatusToString(int status) {
+[[maybe_unused]] static const char* ffAdlStatusToString(int status) {
     switch (status) {
 #define FF_ADL_STATUS_CASE(name) \
     case name:                   \

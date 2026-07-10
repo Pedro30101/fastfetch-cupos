@@ -102,7 +102,7 @@ static void waylandGlobalAddListener(void* data, struct wl_registry* registry, u
     }
 }
 
-static FF_A_UNUSED bool matchDrmConnector(const char* connName, WaylandDisplay* wldata) {
+[[maybe_unused]] static bool matchDrmConnector(const char* connName, WaylandDisplay* wldata) {
     // https://wayland.freedesktop.org/docs/html/apa.html#protocol-spec-wl_output-event-name
     // The doc says that "do not assume that the name is a reflection of an underlying DRM connector, X11 connection, etc."
     // However I can't find a better method to get the edid data
@@ -149,7 +149,7 @@ static FF_A_UNUSED bool matchDrmConnector(const char* connName, WaylandDisplay* 
     return false;
 }
 
-void ffWaylandOutputNameListener(void* data, FF_A_UNUSED void* output, const char* name) {
+void ffWaylandOutputNameListener(void* data, [[maybe_unused]] void* output, const char* name) {
     WaylandDisplay* display = data;
     if (display->id) {
         return;
@@ -165,7 +165,7 @@ void ffWaylandOutputNameListener(void* data, FF_A_UNUSED void* output, const cha
     ffStrbufAppendS(&display->name, name);
 }
 
-void ffWaylandOutputDescriptionListener(void* data, FF_A_UNUSED void* output, const char* description) {
+void ffWaylandOutputDescriptionListener(void* data, [[maybe_unused]] void* output, const char* description) {
     WaylandDisplay* display = data;
     if (display->description.length) {
         return;
@@ -341,7 +341,7 @@ const char* ffdsConnectWayland(FFDisplayServerResult* result) {
 
 #else
 
-const char* ffdsConnectWayland(FF_A_UNUSED FFDisplayServerResult* result) {
+const char* ffdsConnectWayland([[maybe_unused]] FFDisplayServerResult* result) {
     return "Fastfetch was compiled without Wayland support";
 }
 

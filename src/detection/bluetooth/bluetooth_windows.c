@@ -38,7 +38,7 @@ static const char* ffBluetoothDetectBattery(FFlist* devices) {
         return nullptr;
     }
 
-    wchar_t* FF_AUTO_FREE idList = (wchar_t*) malloc((size_t) idListLength * sizeof(wchar_t));
+    FF_AUTO_FREE wchar_t* idList = (wchar_t*) malloc((size_t) idListLength * sizeof(wchar_t));
     if (!idList) {
         return "malloc() failed";
     }

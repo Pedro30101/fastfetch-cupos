@@ -12,8 +12,7 @@ static inline void freeArgBuffer(FFArgBuffer* buffer) {
     }
     buffer->data = nullptr;
     buffer->length = 0;
-}
-#define FF_AUTO_FREE_ARG_BUFFER FF_A_CLEANUP(freeArgBuffer)
+}\
 
 // http://undoc.airesoft.co.uk/user32.dll/IsThreadDesktopComposited.php
 BOOL WINAPI IsThreadDesktopComposited();
@@ -47,7 +46,7 @@ static void detectDisplays(FFDisplayServerResult* ds) {
                     .id = path->targetInfo.id,
                 },
             };
-            FF_AUTO_FREE_ARG_BUFFER FFArgBuffer edid = {};
+            [[gnu::cleanup(freeArgBuffer)]] FFArgBuffer edid = {};
             if (DisplayConfigGetDeviceInfo(&targetName.header) == ERROR_SUCCESS) {
                 wchar_t regPath[256] = L"SYSTEM\\CurrentControlSet\\Enum";
                 wchar_t* pRegPath = regPath + strlen("SYSTEM\\CurrentControlSet\\Enum");

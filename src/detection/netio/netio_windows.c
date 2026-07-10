@@ -8,7 +8,7 @@
 #include <iphlpapi.h>
 
 const char* ffNetIOGetIoCounters(FFlist* result, FFNetIOOptions* options) {
-    IP_ADAPTER_ADDRESSES* FF_AUTO_FREE adapter_addresses = nullptr;
+    FF_AUTO_FREE IP_ADAPTER_ADDRESSES* adapter_addresses = nullptr;
 
     // Multiple attempts in case interfaces change while
     // we are in the middle of querying them.

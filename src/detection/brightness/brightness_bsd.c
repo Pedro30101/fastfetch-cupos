@@ -12,7 +12,7 @@
 #if __has_include(<dev/iicbus/iic.h>)
     #include <dev/iicbus/iic.h>
 
-const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+const char* detectWithDdcci([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     // FIXME: doesn't work for me
     for (char i = '0'; i <= '9'; ++i) {
         char path[] = "/dev/iic0";
@@ -74,7 +74,7 @@ const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FFlist* re
 
 #else
 
-const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FF_A_UNUSED FFlist* result) {
+const char* detectWithDdcci([[maybe_unused]] FFBrightnessOptions* options, [[maybe_unused]] FFlist* result) {
     FF_DEBUG("DDC/CI support is not available on this system");
     return "DDC/CI is supported only on FreeBSD";
 }
@@ -84,7 +84,7 @@ const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FF_A_UNUSE
 #if __has_include(<sys/backlight.h>)
     #include <sys/backlight.h>
 
-const char* detectWithBacklight(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+const char* detectWithBacklight([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     // https://man.freebsd.org/cgi/man.cgi?query=backlight&sektion=9
     char path[] = "/dev/backlight/backlight0";
 
@@ -130,14 +130,14 @@ const char* detectWithBacklight(FF_A_UNUSED FFBrightnessOptions* options, FFlist
 
 #else
 
-const char* detectWithBacklight(FF_A_UNUSED FFBrightnessOptions* options, FF_A_UNUSED FFlist* result) {
+const char* detectWithBacklight([[maybe_unused]] FFBrightnessOptions* options, [[maybe_unused]] FFlist* result) {
     FF_DEBUG("Backlight support is not available on this system");
     return "Backlight is supported only on FreeBSD 13 and newer";
 }
 
 #endif
 
-const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+const char* ffDetectBrightness([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     detectWithBacklight(options, result);
 
     if (options->ddcciSleep != FF_BRIGHTNESS_DDCCI_SLEEP_SKIP && result->length == 0) {

@@ -45,7 +45,7 @@ static const char* detectWithWmi(FFlist* result) {
         0xd43412ac, 0x67f9, 0x4fbb, { 0xa0, 0x81, 0x17, 0x52, 0xa2, 0xc3, 0x3e, 0x84 }
     };
 
-    FF_AUTO_CLOSE_WMI_BLOCK HANDLE hBlock = nullptr;
+    [[gnu::cleanup(ffCloseWmiBlock)]] HANDLE hBlock = nullptr;
 
     ULONG status = WmiOpenBlock(&WmiMonitorBrightnessGuid, WMIGUID_QUERY, &hBlock);
     if (status != 0) {
@@ -204,7 +204,7 @@ static bool hasBuiltinDisplay(const FFDisplayServerResult* displayServer) {
     return false;
 }
 
-const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist* result) {
+const char* ffDetectBrightness([[maybe_unused]] FFBrightnessOptions* options, FFlist* result) {
     const FFDisplayServerResult* displayServer = ffConnectDisplayServer();
     FF_DEBUG("start, displayCount=%u", displayServer->displays.length);
 

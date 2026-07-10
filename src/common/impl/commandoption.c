@@ -82,7 +82,7 @@ void ffPrepareCommandOption(FFdata* data) {
             case 'D':
             case 'd':
                 FF_IF_MODULE_MATCH(FF_DISKIO_MODULE_NAME) {
-                    FF_A_CLEANUP(ffDestroyDiskIOOptions) FFDiskIOOptions options;
+                    [[gnu::cleanup(ffDestroyDiskIOOptions)]] FFDiskIOOptions options;
                     ffInitDiskIOOptions(&options);
                     ffPrepareDiskIO(&options);
                 }
@@ -93,7 +93,7 @@ void ffPrepareCommandOption(FFdata* data) {
             case 'N':
             case 'n':
                 FF_IF_MODULE_MATCH(FF_NETIO_MODULE_NAME) {
-                    FF_A_CLEANUP(ffDestroyNetIOOptions) FFNetIOOptions options;
+                    [[gnu::cleanup(ffDestroyNetIOOptions)]] FFNetIOOptions options;
                     ffInitNetIOOptions(&options);
                     ffPrepareNetIO(&options);
                 }
@@ -104,7 +104,7 @@ void ffPrepareCommandOption(FFdata* data) {
             case 'P':
             case 'p':
                 FF_IF_MODULE_MATCH(FF_PUBLICIP_MODULE_NAME) {
-                    FF_A_CLEANUP(ffDestroyPublicIpOptions) FFPublicIPOptions options;
+                    [[gnu::cleanup(ffDestroyPublicIpOptions)]] FFPublicIPOptions options;
                     ffInitPublicIpOptions(&options);
                     ffPreparePublicIp(&options);
                 }
@@ -115,7 +115,7 @@ void ffPrepareCommandOption(FFdata* data) {
             case 'W':
             case 'w':
                 FF_IF_MODULE_MATCH(FF_WEATHER_MODULE_NAME) {
-                    FF_A_CLEANUP(ffDestroyWeatherOptions) FFWeatherOptions options;
+                    [[gnu::cleanup(ffDestroyWeatherOptions)]] FFWeatherOptions options;
                     ffInitWeatherOptions(&options);
                     ffPrepareWeather(&options);
                 }

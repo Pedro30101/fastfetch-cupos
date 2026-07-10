@@ -13,14 +13,14 @@ static inline void wrapYyjsonFree(yyjson_doc** doc) {
     }
 }
 
-const char* ffDetectCamera(FF_A_UNUSED FFlist* result) {
+const char* ffDetectCamera([[maybe_unused]] FFlist* result) {
     FF_STRBUF_AUTO_DESTROY buffer = ffStrbufCreate();
 
     if (ffProcessAppendStdOut(&buffer, (char* const[]) { FF_TERMUX_API_PATH, FF_TERMUX_API_PARAM, nullptr })) {
         return "Starting `" FF_TERMUX_API_PATH " " FF_TERMUX_API_PARAM "` failed";
     }
 
-    yyjson_doc* FF_A_CLEANUP(wrapYyjsonFree) doc = yyjson_read_opts(buffer.chars, buffer.length, 0, nullptr, nullptr);
+    [[gnu::cleanup(wrapYyjsonFree)]] yyjson_doc* doc = yyjson_read_opts(buffer.chars, buffer.length, 0, nullptr, nullptr);
     if (!doc) {
         return "Failed to parse camera info";
     }
