@@ -3,13 +3,12 @@
 #include "fastfetch.h"
 #include "common/format.h"
 
-typedef enum FF_A_PACKED FFPrintType {
+typedef enum FFPrintType: uint8_t {
     FF_PRINT_TYPE_DEFAULT = 0,
     FF_PRINT_TYPE_NO_CUSTOM_KEY = 1 << 0, // key has been formatted outside
     FF_PRINT_TYPE_NO_CUSTOM_KEY_COLOR = 1 << 1,
     FF_PRINT_TYPE_NO_CUSTOM_KEY_WIDTH = 1 << 2,
     FF_PRINT_TYPE_NO_CUSTOM_OUTPUT_FORMAT = 1 << 3, // reserved
-    FF_PRINT_TYPE_FORCE_UNSIGNED = UINT8_MAX,
 } FFPrintType;
 
 void ffPrintLogoAndKey(const char* moduleName, uint8_t moduleIndex, const FFModuleArgs* moduleArgs, FFPrintType printType);

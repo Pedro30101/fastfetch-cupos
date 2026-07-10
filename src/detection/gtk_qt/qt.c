@@ -16,7 +16,7 @@ static inline bool allValuesSet(const FFQtResult* result) {
         result->wallpaper.length > 0;
 }
 
-typedef enum FF_A_PACKED PlasmaCategory {
+typedef enum PlasmaCategory: uint8_t {
     PLASMA_CATEGORY_GENERAL,
     PLASMA_CATEGORY_KDE,
     PLASMA_CATEGORY_ICONS,

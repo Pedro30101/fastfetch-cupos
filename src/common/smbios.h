@@ -12,8 +12,7 @@ static inline void ffCleanUpSmbiosValue(FFstrbuf* value) {
 // https://github.com/KunYi/DumpSMBIOS
 // https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.9.0.pdf
 
-typedef enum FF_A_PACKED FFSmbiosType // : uint8_t
-{
+typedef enum FFSmbiosType : uint8_t {
     FF_SMBIOS_TYPE_BIOS = 0,
     FF_SMBIOS_TYPE_SYSTEM_INFO = 1,
     FF_SMBIOS_TYPE_BASEBOARD_INFO = 2,

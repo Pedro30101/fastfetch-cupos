@@ -36,7 +36,7 @@ typedef struct FFModuleBaseInfo {
     FFModuleFormatArgList formatArgs;
 } FFModuleBaseInfo;
 
-typedef enum FF_A_PACKED FFModuleKeyType {
+typedef enum FFModuleKeyType: uint8_t {
     FF_MODULE_KEY_TYPE_NONE = 0,
     FF_MODULE_KEY_TYPE_STRING = 1 << 0,
     FF_MODULE_KEY_TYPE_ICON = 1 << 1,
@@ -47,7 +47,6 @@ typedef enum FF_A_PACKED FFModuleKeyType {
     FF_MODULE_KEY_TYPE_BOTH_2 = FF_MODULE_KEY_TYPE_BOTH_0 | (2 << FF_MODULE_KEY_TYPE_SPACE_SHIFT),
     FF_MODULE_KEY_TYPE_BOTH_3 = FF_MODULE_KEY_TYPE_BOTH_0 | (3 << FF_MODULE_KEY_TYPE_SPACE_SHIFT),
     FF_MODULE_KEY_TYPE_BOTH_4 = FF_MODULE_KEY_TYPE_BOTH_0 | (4 << FF_MODULE_KEY_TYPE_SPACE_SHIFT),
-    FF_MODULE_KEY_TYPE_FORCE_UNSIGNED = UINT8_MAX,
 } FFModuleKeyType;
 
 typedef struct FFModuleArgs {

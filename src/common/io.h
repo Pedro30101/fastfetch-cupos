@@ -169,11 +169,10 @@ FF_A_NONNULL(2, 3) static inline bool ffReadFileBufferRelative(FFNativeFD dfd, c
     return ffAppendFileBufferRelative(dfd, fileName, buffer);
 }
 
-typedef enum FF_A_PACKED FFPathType {
+typedef enum FFPathType: uint8_t {
     FF_PATHTYPE_FILE = 1 << 0,
     FF_PATHTYPE_DIRECTORY = 1 << 1,
     FF_PATHTYPE_ANY = FF_PATHTYPE_FILE | FF_PATHTYPE_DIRECTORY,
-    FF_PATHTYPE_FORCE_UNSIGNED = UINT8_MAX,
 } FFPathType;
 
 FF_A_NONNULL(1) static inline bool ffPathExists(const char* path, FFPathType pathType) {

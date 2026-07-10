@@ -2,11 +2,10 @@
 
 #include "gpu.h"
 
-typedef enum FF_A_PACKED FFGpuDriverConditionType {
+typedef enum FFGpuDriverConditionType: uint8_t {
     FF_GPU_DRIVER_CONDITION_TYPE_BUS_ID = 1 << 0,
     FF_GPU_DRIVER_CONDITION_TYPE_DEVICE_ID = 1 << 1,
     FF_GPU_DRIVER_CONDITION_TYPE_LUID = 1 << 2,
-    FF_GPU_DRIVER_CONDITION_TYPE_FORCE_UNSIGNED = UINT8_MAX,
 } FFGpuDriverConditionType;
 
 typedef struct FFGpuDriverPciDeviceId {
