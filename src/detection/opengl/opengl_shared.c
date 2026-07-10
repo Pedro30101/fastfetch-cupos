@@ -18,7 +18,7 @@
         #define GL_SHADING_LANGUAGE_VERSION 0x8B8C
     #endif
 
-void ffOpenGLHandleResult(FFOpenGLResult* result, __typeof__(&glGetString) ffglGetString) {
+void ffOpenGLHandleResult(FFOpenGLResult* result, typeof(&glGetString) ffglGetString) {
     ffStrbufAppendS(&result->version, (const char*) ffglGetString(GL_VERSION));
     ffStrbufAppendS(&result->renderer, (const char*) ffglGetString(GL_RENDERER));
     ffStrbufAppendS(&result->vendor, (const char*) ffglGetString(GL_VENDOR));
@@ -166,7 +166,7 @@ const char* ffOpenGLDetectByEGL(FFOpenGLResult* result) {
     FF_LIBRARY_LOAD_SYMBOL_VAR_MESSAGE(egl, eglData, eglTerminate);
 
     FF_DEBUG("Resolving glGetString via eglGetProcAddress()");
-    eglData.ffglGetString = (__typeof__(&glGetString)) ffeglGetProcAddress("glGetString");
+    eglData.ffglGetString = (typeof(&glGetString)) ffeglGetProcAddress("glGetString");
     if (!eglData.ffglGetString) {
         FF_DEBUG("eglGetProcAddress('glGetString') returned nullptr");
         return "eglGetProcAddress(glGetString) returned nullptr";

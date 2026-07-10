@@ -18,7 +18,7 @@
 
     #include <GL/gl.h>
 
-void ffOpenGLHandleResult(FFOpenGLResult* result, __typeof__(&glGetString) ffglGetString);
+void ffOpenGLHandleResult(FFOpenGLResult* result, typeof(&glGetString) ffglGetString);
 
 #endif // FF_HAVE_GL
 
@@ -109,7 +109,7 @@ static const char* glxHandleDisplay(FFOpenGLResult* result, GLXData* data) {
 }
 
 static const char* glxHandleData(FFOpenGLResult* result, GLXData* data) {
-    data->ffglGetString = (__typeof__(data->ffglGetString)) data->ffglXGetProcAddress((const GLubyte*) "glGetString");
+    data->ffglGetString = (typeof(data->ffglGetString)) data->ffglXGetProcAddress((const GLubyte*) "glGetString");
     if (data->ffglGetString == nullptr) {
         return "glXGetProcAddress(glGetString) returned nullptr";
     }

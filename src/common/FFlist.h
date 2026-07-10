@@ -134,9 +134,9 @@ static inline void* ffListAdd(FFlist* list, uint32_t elementSize) {
 
 #define FF_LIST_CONTAINS(listVar, pCompElement, compFunc)                                                                              \
     ({                                                                                                                                 \
-        typedef __typeof__(*(pCompElement)) compElementType;                                                                           \
+        typedef typeof(*(pCompElement)) compElementType;                                                                           \
         typedef bool compFuncType(const compElementType*, const compElementType*);                                                     \
-        static_assert(__builtin_types_compatible_p(__typeof__(compFunc), compFuncType), "Incompatible callback function");             \
+        static_assert(__builtin_types_compatible_p(typeof(compFunc), compFuncType), "Incompatible callback function");             \
         ffListContains(&(listVar), (uint32_t) sizeof(*(pCompElement)), (pCompElement), (bool (*)(const void*, const void*)) compFunc); \
     })
 

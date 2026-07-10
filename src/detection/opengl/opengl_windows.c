@@ -13,7 +13,7 @@ typedef struct WGLData {
     FF_LIBRARY_SYMBOL(wglDeleteContext)
 } WGLData;
 
-void ffOpenGLHandleResult(FFOpenGLResult* result, __typeof__(&glGetString) ffglGetString);
+void ffOpenGLHandleResult(FFOpenGLResult* result, typeof(&glGetString) ffglGetString);
 
 static const char* wglHandleContext(WGLData* wglData, FFOpenGLResult* result, HDC hdc, HGLRC context) {
     if (wglData->ffwglMakeCurrent(hdc, context) == FALSE) {

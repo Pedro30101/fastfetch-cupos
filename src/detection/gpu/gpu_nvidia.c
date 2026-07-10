@@ -52,7 +52,7 @@ static const char* detectMoreByNvapi(FFGpuDriverResult* result) {
             1);
         FF_LIBRARY_LOAD_SYMBOL_MESSAGE(libnvapi, nvapi_QueryInterface)
     #define FF_NVAPI_INTERFACE(iName, iOffset)                          \
-        __typeof__(&iName) ff##iName = ffnvapi_QueryInterface(iOffset); \
+        typeof(&iName) ff##iName = ffnvapi_QueryInterface(iOffset); \
         if (ff##iName == nullptr) return "nvapi_QueryInterface " #iName " failed";
 
         FF_NVAPI_INTERFACE(nvapi_Initialize, NVAPI_INTERFACE_OFFSET_INITIALIZE)

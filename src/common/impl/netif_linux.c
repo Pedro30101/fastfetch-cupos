@@ -163,7 +163,7 @@ bool ffNetifGetDefaultRouteImplV4(FFNetifDefaultRouteResult* result) {
             }
 
             FF_DEBUG("Processing IPv4 default route candidate #%d", routeCount);
-            entry = (__typeof__(entry)) {}; // Default to zero metric (no RTA_PRIORITY found)
+            entry = (typeof(entry)) {}; // Default to zero metric (no RTA_PRIORITY found)
 
             // Parse route attributes
             size_t rtm_len = RTM_PAYLOAD(nlh);
@@ -372,7 +372,7 @@ bool ffNetifGetDefaultRouteImplV6(FFNetifDefaultRouteResult* result) {
             }
 
             FF_DEBUG("Processing IPv6 default route candidate #%d", routeCount);
-            entry = (__typeof__(entry)) {}; // Default to zero metric (no RTA_PRIORITY found)
+            entry = (typeof(entry)) {}; // Default to zero metric (no RTA_PRIORITY found)
 
             // Parse route attributes
             size_t rtm_len = RTM_PAYLOAD(nlh);

@@ -371,7 +371,7 @@ const char* ffDrmDetectNouveau(FFGPUResult* gpu, int fd) {
 
 const char* ffGPUDetectDriverSpecific(const FFGPUOptions* options, FFGPUResult* gpu, FFGpuDriverPciBusId pciBusId) {
 #if !__OpenBSD__
-    __typeof__(&ffDetectNvidiaGpuInfo) detectFn;
+    typeof(&ffDetectNvidiaGpuInfo) detectFn;
     const char* soName;
     if (getDriverSpecificDetectionFn(gpu->vendor.chars, &detectFn, &soName) && (options->temp || options->driverSpecific)) {
         return detectFn(&(FFGpuDriverCondition) {

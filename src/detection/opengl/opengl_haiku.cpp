@@ -6,7 +6,7 @@ extern "C" {
 #if FF_HAVE_EGL
 const char* ffOpenGLDetectByEGL(FFOpenGLResult* result);
 #endif
-void ffOpenGLHandleResult(FFOpenGLResult* result, __typeof__(&glGetString) ffglGetString);
+void ffOpenGLHandleResult(FFOpenGLResult* result, typeof(&glGetString) ffglGetString);
 }
 
 static const char* oglDetectOpenGL(FFOpenGLResult* result) {

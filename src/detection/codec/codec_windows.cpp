@@ -277,7 +277,7 @@ static const FFCodecMftEncoderSubtype FF_D3D11VA_MFT_ENCODER_SUBTYPES[] = {
     { &MFVideoFormat_AV1, FF_CODEC_TYPE_AV1 },
 };
 
-static FFCodecType ffDetectD3d11vaDecoders(IDXGIAdapter1* adapter, __typeof__(&D3D11CreateDevice) ffD3D11CreateDevice) {
+static FFCodecType ffDetectD3d11vaDecoders(IDXGIAdapter1* adapter, typeof(&D3D11CreateDevice) ffD3D11CreateDevice) {
     FF_AUTO_RELEASE_COM_OBJECT ID3D11Device* d3dDevice = nullptr;
     D3D_FEATURE_LEVEL featureLevel;
     if (FAILED(ffD3D11CreateDevice(
@@ -319,7 +319,7 @@ static FFCodecType ffDetectD3d11vaDecoders(IDXGIAdapter1* adapter, __typeof__(&D
     return decoders;
 }
 
-static FFCodecType ffDetectD3d11MftEncoders(const LUID& adapterLuid, __typeof__(&MFCreateAttributes) ffMFCreateAttributes, __typeof__(&MFTEnum2) ffMFTEnum2) {
+static FFCodecType ffDetectD3d11MftEncoders(const LUID& adapterLuid, typeof(&MFCreateAttributes) ffMFCreateAttributes, typeof(&MFTEnum2) ffMFTEnum2) {
     FF_AUTO_RELEASE_COM_OBJECT IMFAttributes* attributes = nullptr;
     if (FAILED(ffMFCreateAttributes(&attributes, 1)) || !attributes) {
         return FF_CODEC_TYPE_NONE;

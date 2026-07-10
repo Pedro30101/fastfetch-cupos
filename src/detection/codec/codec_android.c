@@ -37,8 +37,8 @@ static bool ffCodecIsLikelySoftware(const char* codecName) {
 
 static bool ffCodecIsHardwareAccelerated(
     AMediaCodec* codec,
-    __typeof__(&AMediaCodec_getName) ffAMediaCodec_getName,
-    __typeof__(&AMediaCodec_releaseName) ffAMediaCodec_releaseName) {
+    typeof(&AMediaCodec_getName) ffAMediaCodec_getName,
+    typeof(&AMediaCodec_releaseName) ffAMediaCodec_releaseName) {
     if (!codec) {
         return false;
     }

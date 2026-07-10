@@ -403,7 +403,7 @@ ffGPUDetectWsl2
             FF_DEBUG("KMTQAITYPE_UMD_DRIVER_VERSION query failed for adapter #%u: %s", i, ffDebugNtStatus(status));
         }
 
-        __typeof__(&ffDetectNvidiaGpuInfo) detectFn;
+        typeof(&ffDetectNvidiaGpuInfo) detectFn;
         const char* dllName;
         if (options->driverSpecific && getDriverSpecificDetectionFn(gpu->vendor.chars, &detectFn, &dllName)) {
             FF_DEBUG("Calling driver-specific detection function for vendor: %s, DLL: %s", gpu->vendor.chars, dllName);

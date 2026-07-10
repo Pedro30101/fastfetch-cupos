@@ -406,7 +406,7 @@ const char* ffNetworkingRecvHttpResponse(FFNetworkingState* state, FFstrbuf* buf
         FF_DEBUG("Setting receive timeout: %u ms", timeout);
         struct timeval timev;
         timev.tv_sec = timeout / 1000;
-        timev.tv_usec = (__typeof__(timev.tv_usec)) ((timeout % 1000) * 1000); // milliseconds to microseconds
+        timev.tv_usec = (typeof(timev.tv_usec)) ((timeout % 1000) * 1000); // milliseconds to microseconds
         setsockopt(state->sockfd, SOL_SOCKET, SO_RCVTIMEO, &timev, sizeof(timev));
     }
 #endif

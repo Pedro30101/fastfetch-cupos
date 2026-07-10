@@ -6,7 +6,7 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/OpenGL.h> // This brings in CGL, not GL
 
-void ffOpenGLHandleResult(FFOpenGLResult* result, __typeof__(&glGetString) ffglGetString);
+void ffOpenGLHandleResult(FFOpenGLResult* result, typeof(&glGetString) ffglGetString);
 
 static const char* cglHandleContext(FFOpenGLResult* result, CGLContextObj context) {
     if (CGLSetCurrentContext(context) != kCGLNoError) {

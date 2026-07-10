@@ -48,7 +48,7 @@ const char* ffDetectMthreadsGpuInfo(const FFGpuDriverCondition* cond, FFGpuDrive
     #define FF_GPU_DRIVER_DLLNAME_PATH_PREFIX
 #endif
 
-[[maybe_unused]] static inline bool getDriverSpecificDetectionFn(const char* vendor, __typeof__(&ffDetectNvidiaGpuInfo)* pDetectFn, const char** pDllName) {
+[[maybe_unused]] static inline bool getDriverSpecificDetectionFn(const char* vendor, typeof(&ffDetectNvidiaGpuInfo)* pDetectFn, const char** pDllName) {
     if (vendor == FF_GPU_VENDOR_NAME_NVIDIA) {
         *pDetectFn = ffDetectNvidiaGpuInfo;
 #ifdef _WIN32
