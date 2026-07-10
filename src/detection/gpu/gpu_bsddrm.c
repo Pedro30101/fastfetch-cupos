@@ -1,6 +1,7 @@
+#include "gpu.h"
+
 #if FF_HAVE_DRM
 
-    #include "gpu.h"
     #include "common/strutil.h"
     #include "common/io.h"
 
@@ -72,7 +73,6 @@ static const char* drmGetPciinfo(int drmfd, const char* drmId, struct drm_pciinf
     };
 
     if (ioctl(pcifd, PCIOCGETCONF, &pcio) < 0) {
-        perror("ioctl");
         return "ioctl(pcifd, PCIOCGETCONF, &pc) failed";
     }
 
@@ -188,7 +188,7 @@ const char* ffGPUDetectByDrmBSD(const FFGPUOptions* options, FFlist* gpus) {
             }
         }
 
-        ffGPUFillVendorByDeviceName(gpu);
+        ffGPUDetectTypeByVendorAndName(gpu);
     }
 
     return NULL;
@@ -201,4 +201,4 @@ const char* ffGPUDetectByDrmBSD(const FFGPUOptions* options, FFlist* gpus) {
     return "Fastfetch was built without libdrm support";
 }
 
-#endif // __FreeBSD__ || __OpenBSD__
+#endif // FF_HAVE_DRM

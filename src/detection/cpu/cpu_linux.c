@@ -461,7 +461,6 @@ static void detectArmName(FFstrbuf* cpuinfo, FFCPUResult* cpu, uint32_t implId) 
     char* line = NULL;
     size_t len = 0;
     uint32_t lastPartId = UINT32_MAX;
-    uint32_t num = 0;
     while (ffStrbufGetline(&line, &len, cpuinfo)) {
         if (!ffStrStartsWith(line, "CPU part\t: ")) {
             continue;
@@ -529,10 +528,7 @@ static void detectArmName(FFstrbuf* cpuinfo, FFCPUResult* cpu, uint32_t implId) 
         }
         if (lastPartId != partId) {
             if (lastPartId != UINT32_MAX) {
-                if (num > 1) {
-                    ffStrbufAppendF(&cpu->name, "*%u", num);
-                }
-                ffStrbufAppendS(&cpu->name, " + ");
+                ffStrbufAppendC(&cpu->name, '+');
             }
             if (name) {
                 ffStrbufAppendS(&cpu->name, name);
@@ -542,13 +538,7 @@ static void detectArmName(FFstrbuf* cpuinfo, FFCPUResult* cpu, uint32_t implId) 
                 ffStrbufAppend(&cpu->name, &cpu->vendor);
             }
             lastPartId = partId;
-            num = 1;
-        } else {
-            ++num;
         }
-    }
-    if (num > 1) {
-        ffStrbufAppendF(&cpu->name, "*%u", num);
     }
 }
 #endif
