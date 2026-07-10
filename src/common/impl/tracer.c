@@ -1,4 +1,4 @@
-// DON'T CALL ANY EXTERNAL FUNCTION IN THIS FILE
+// DON'T CALL ANY FASTFETCH FUNCTION IN THIS FILE (to avoid recursion when -finstrument-functions is enabled)
 
 #include <stdio.h>
 #include <time.h>
