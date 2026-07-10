@@ -32,7 +32,7 @@ extern "C" const char* ffDetectCamera(FF_A_UNUSED FFlist* result) {
         return "SetGUID(MF_*) failed";
     }
 
-    IMFActivate** devices = NULL;
+    IMFActivate** devices = nullptr;
     uint32_t count;
 
     if (FAILED(ffMFEnumDeviceSources(attrs, &devices, &count))) {
@@ -89,7 +89,7 @@ extern "C" const char* ffDetectCamera(FF_A_UNUSED FFlist* result) {
         }
 
         // Assume first type is the maximum resolution
-        IMFMediaType* type = NULL;
+        IMFMediaType* type = nullptr;
         for (DWORD idx = 0; SUCCEEDED(handler->GetMediaTypeByIndex(idx, &type)); ++idx) {
             on_scope_exit destroyType([=] { type->Release(); });
 

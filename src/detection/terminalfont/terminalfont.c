@@ -77,7 +77,7 @@ static bool parseGhosttyConfig(FFstrbuf* path, FFstrbuf* fontName, FFstrbuf* fon
         return false;
     }
 
-    char* line = NULL;
+    char* line = nullptr;
     size_t len = 0;
     while (ffStrbufGetline(&line, &len, &buffer)) {
         if (ffParsePropLine(line, "font-family =", &temp)) {
@@ -124,10 +124,10 @@ static void detectGhostty(const FFstrbuf* exe, FFTerminalFontResult* terminalFon
         const char* error = ffProcessAppendStdOut(&buffer, (char* const[]){
                                                                exe->chars,
                                                                "+show-config",
-                                                               NULL,
+                                                               nullptr,
                                                            });
-        if (error == NULL) {
-            char* line = NULL;
+        if (error == nullptr) {
+            char* line = nullptr;
             size_t len = 0;
             while (ffStrbufGetline(&line, &len, &buffer)) {
                 if (ffStrStartsWith(line, "font-family = ")) {
@@ -167,7 +167,7 @@ static void detectGhostty(const FFstrbuf* exe, FFTerminalFontResult* terminalFon
     ffFontInitValues(&terminalFont->font, fontName.chars, fontSize.chars);
     if (fontNameFallback.length > 0) {
         FF_DEBUG("applying fallback family='%s'", fontNameFallback.chars);
-        ffFontInitValues(&terminalFont->fallback, fontNameFallback.chars, NULL);
+        ffFontInitValues(&terminalFont->fallback, fontNameFallback.chars, nullptr);
     }
     FF_DEBUG("result family='%s' size='%s'%s", fontName.chars, fontSize.chars, fontNameFallback.length ? " (with fallback)" : "");
     FF_DEBUG("detectGhostty: end");
@@ -180,7 +180,7 @@ FF_A_UNUSED static void detectTTY(FFTerminalFontResult* terminalFont) {
 
     if (fontName.length == 0) {
         ffStrbufAppendS(&fontName, "VGA default kernel font ");
-        ffProcessAppendStdOut(&fontName, (char* const[]){ "showconsolefont", "--info", NULL });
+        ffProcessAppendStdOut(&fontName, (char* const[]){ "showconsolefont", "--info", nullptr });
 
         ffStrbufTrimRight(&fontName, ' ');
     }
@@ -203,7 +203,7 @@ FF_A_UNUSED static bool detectKitty(const FFstrbuf* exe, FFTerminalFontResult* r
             2,
             "\eP1+r%*[^=]=%511[^\e]\e\\\eP1+r%*[^=]=%511[^\e]\e\\",
             fontHex,
-            sizeHex) == NULL &&
+            sizeHex) == nullptr &&
         *fontHex && *sizeHex) {
         // decode hex string
         for (const char* p = fontHex; p[0] && p[1]; p += 2) {
@@ -224,7 +224,7 @@ FF_A_UNUSED static bool detectKitty(const FFstrbuf* exe, FFTerminalFontResult* r
                                              exe->chars,
                                              "+kitten",
                                              "query-terminal",
-                                             NULL,
+                                             nullptr,
                                          })) {
             ffParsePropLines(buf.chars, "font_family: ", &fontName);
             ffParsePropLines(buf.chars, "font_size: ", &fontSize);
@@ -260,7 +260,7 @@ static bool detectWezterm(const FFstrbuf* exe, FFTerminalFontResult* result) {
 
     FF_STRBUF_AUTO_DESTROY fontName = ffStrbufCreate();
 
-    ffStrbufSetS(&result->error, ffProcessAppendStdOut(&fontName, (char* const[]){ cli.chars, "ls-fonts", "--text", "a", NULL }));
+    ffStrbufSetS(&result->error, ffProcessAppendStdOut(&fontName, (char* const[]){ cli.chars, "ls-fonts", "--text", "a", nullptr }));
     if (result->error.length) {
         return false;
     }
@@ -306,7 +306,7 @@ static bool detectTabby(FFTerminalFontResult* result) {
 
 static bool detectContour(const FFstrbuf* exe, FFTerminalFontResult* result) {
     FF_STRBUF_AUTO_DESTROY buf = ffStrbufCreate();
-    if (ffProcessAppendStdOut(&buf, (char* const[]){ exe->chars, "font-locator", NULL })) {
+    if (ffProcessAppendStdOut(&buf, (char* const[]){ exe->chars, "font-locator", nullptr })) {
         ffStrbufAppendS(&result->error, "`contour font-locator` failed");
         return false;
     }
@@ -365,7 +365,7 @@ static bool detectTerminalFontCommon(const FFTerminalResult* terminal, FFTermina
     } else if (ffStrbufStartsWithIgnCaseS(&terminal->processName, "contour")) {
         detectContour(&terminal->exe, terminalFont);
     } else if (ffStrbufStartsWithIgnCaseS(&terminal->processName, "ghostty")) {
-        detectGhostty(&terminal->exe, terminalFont, NULL, NULL);
+        detectGhostty(&terminal->exe, terminalFont, nullptr, nullptr);
     } else if (ffStrbufStartsWithIgnCaseS(&terminal->processName, "Muxy")) {
         detectGhostty(&terminal->exe, terminalFont, "Muxy/ghostty.conf", "muxy/ghostty.conf");
     } else if (ffStrbufStartsWithIgnCaseS(&terminal->processName, "rio")) {

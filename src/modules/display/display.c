@@ -65,7 +65,7 @@ bool ffPrintDisplay(FFDisplayOptions* options) {
     for (uint32_t i = 0; i < dsResult->displays.length; i++) {
         FFDisplayResult* result = FF_LIST_GET(FFDisplayResult, dsResult->displays, i);
         uint32_t moduleIndex = dsResult->displays.length == 1 ? 0 : i + 1;
-        const char* displayType = result->type == FF_DISPLAY_TYPE_UNKNOWN ? NULL : result->type == FF_DISPLAY_TYPE_BUILTIN ? "Built-in"
+        const char* displayType = result->type == FF_DISPLAY_TYPE_UNKNOWN ? nullptr : result->type == FF_DISPLAY_TYPE_BUILTIN ? "Built-in"
                                                                                                                            : "External";
 
         ffStrbufClear(&key);

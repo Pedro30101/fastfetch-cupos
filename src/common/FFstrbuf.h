@@ -90,7 +90,7 @@ void ffStrbufLowerCase(FFstrbuf* strbuf);
 
 // Function alters the buffer to extract lines or delimited segments (replaces the delimiter with '\0')
 // so that buffer MUST be heap allocated (NOT a static string)
-// `lineptr` must be `NULL` and `n` MUST be `0` for the first call
+// `lineptr` must be `nullptr` and `n` MUST be `0` for the first call
 // Caller MUST NOT free `*lineptr`
 bool ffStrbufGetdelim(char** lineptr, size_t* n, char delimiter, FFstrbuf* buffer);
 void ffStrbufGetdelimRestore(char** lineptr, size_t* n, char delimiter, FFstrbuf* buffer);
@@ -103,7 +103,7 @@ void ffStrbufGetdelimRestore(char** lineptr, size_t* n, char delimiter, FFstrbuf
  * @param[in,out] lineptr The pointer to a pointer that will be set to the start of the line
                           (points to buffer's internal memory address to avoid memory allocation and copy).
                           MUST NOT be freed by the caller, unlike `getline(3)`.
- *                        MUST be NULL for the first call.
+ *                        MUST be nullptr for the first call.
  * @param[in,out] n The pointer to the size of the buffer of lineptr.
                     MUST be 0 for the first call.
  * @param[in] buffer The buffer to read from.
@@ -186,7 +186,7 @@ static inline void ffStrbufDestroy(FFstrbuf* strbuf) {
 }
 
 FF_A_NODISCARD static inline uint32_t ffStrbufGetFree(const FFstrbuf* strbuf) {
-    assert(strbuf != NULL);
+    assert(strbuf != nullptr);
     if (strbuf->allocated == 0) {
         return 0;
     }
@@ -210,7 +210,7 @@ static inline void ffStrbufEnsureFree(FFstrbuf* strbuf, uint32_t free) {
 
 
 static inline void ffStrbufClear(FFstrbuf* strbuf) {
-    assert(strbuf != NULL);
+    assert(strbuf != nullptr);
     extern char* CHAR_NULL_PTR;
 
     if (strbuf->allocated == 0) {
@@ -244,7 +244,7 @@ static inline void ffStrbufAppendNC(FFstrbuf* strbuf, uint32_t num, char c) {
 }
 
 static inline void ffStrbufAppendNS(FFstrbuf* strbuf, uint32_t length, const char* value) {
-    if (__builtin_expect(value == NULL || length == 0, false)) {
+    if (__builtin_expect(value == nullptr || length == 0, false)) {
         return;
     }
     if (__builtin_expect(ffStrbufGetFree(strbuf) < length, false)) {
@@ -258,7 +258,7 @@ static inline void ffStrbufAppendNS(FFstrbuf* strbuf, uint32_t length, const cha
 
 static inline void ffStrbufAppend(FFstrbuf* __restrict strbuf, const FFstrbuf* __restrict value) {
     assert(value != strbuf);
-    if (value == NULL) {
+    if (value == nullptr) {
         return;
     }
     ffStrbufAppendNS(strbuf, value->length, value->chars);
@@ -269,9 +269,9 @@ static inline void ffStrbufRecalculateLength(FFstrbuf* strbuf) {
 }
 
 static inline void ffStrbufSetS(FFstrbuf* strbuf, const char* value) {
-    assert(strbuf != NULL);
+    assert(strbuf != nullptr);
 
-    if (value == NULL) {
+    if (value == nullptr) {
         ffStrbufClear(strbuf);
     } else {
         ffStrbufSetNS(strbuf, (uint32_t) strlen(value), value);
@@ -279,7 +279,7 @@ static inline void ffStrbufSetS(FFstrbuf* strbuf, const char* value) {
 }
 
 static inline bool ffStrbufSetJsonVal(FFstrbuf* strbuf, yyjson_val* jsonVal) {
-    assert(strbuf != NULL);
+    assert(strbuf != nullptr);
 
     if (yyjson_is_str(jsonVal)) {
         ffStrbufSetNS(strbuf, (uint32_t) unsafe_yyjson_get_len(jsonVal), unsafe_yyjson_get_str(jsonVal));
@@ -291,7 +291,7 @@ static inline bool ffStrbufSetJsonVal(FFstrbuf* strbuf, yyjson_val* jsonVal) {
 }
 
 static inline void ffStrbufAppendS(FFstrbuf* strbuf, const char* value) {
-    if (value == NULL) {
+    if (value == nullptr) {
         return;
     }
     ffStrbufAppendNS(strbuf, (uint32_t) strlen(value), value);
@@ -339,7 +339,7 @@ static inline void ffStrbufSetStatic(FFstrbuf* strbuf, const char* value) {
         free(strbuf->chars);
     }
 
-    if (value != NULL) {
+    if (value != nullptr) {
         ffStrbufInitStatic(strbuf, value);
     } else {
         ffStrbufInit(strbuf);
@@ -374,14 +374,14 @@ FF_A_NODISCARD static inline FFstrbuf ffStrbufCreateS(const char* str) {
 }
 
 static inline void ffStrbufPrepend(FFstrbuf* strbuf, FFstrbuf* value) {
-    if (value == NULL) {
+    if (value == nullptr) {
         return;
     }
     ffStrbufPrependNS(strbuf, value->length, value->chars);
 }
 
 static inline void ffStrbufPrependS(FFstrbuf* strbuf, const char* value) {
-    if (value == NULL) {
+    if (value == nullptr) {
         return;
     }
     ffStrbufPrependNS(strbuf, (uint32_t) strlen(value), value);
@@ -421,11 +421,11 @@ static inline FF_A_NODISCARD bool ffStrbufIgnCaseEqual(const FFstrbuf* strbuf, c
 }
 
 static inline FF_A_NODISCARD bool ffStrbufContainC(const FFstrbuf* strbuf, char c) {
-    return memchr(strbuf->chars, c, strbuf->length) != NULL;
+    return memchr(strbuf->chars, c, strbuf->length) != nullptr;
 }
 
 static inline FF_A_NODISCARD bool ffStrbufContainS(const FFstrbuf* strbuf, const char* str) {
-    return strstr(strbuf->chars, str) != NULL;
+    return strstr(strbuf->chars, str) != nullptr;
 }
 
 static inline FF_A_NODISCARD bool ffStrbufContain(const FFstrbuf* strbuf, const FFstrbuf* str) {
@@ -433,7 +433,7 @@ static inline FF_A_NODISCARD bool ffStrbufContain(const FFstrbuf* strbuf, const 
 }
 
 static inline FF_A_NODISCARD bool ffStrbufContainIgnCaseS(const FFstrbuf* strbuf, const char* str) {
-    return strcasestr(strbuf->chars, str) != NULL;
+    return strcasestr(strbuf->chars, str) != nullptr;
 }
 
 static inline FF_A_NODISCARD bool ffStrbufContainIgnCase(const FFstrbuf* strbuf, const FFstrbuf* str) {

@@ -22,5 +22,5 @@ const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist*
         brightness->current = value;
         brightness->builtin = true;
     }
-    return NULL;
+    return nullptr;
 }

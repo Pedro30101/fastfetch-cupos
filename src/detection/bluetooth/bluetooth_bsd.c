@@ -12,7 +12,7 @@ static int enumDev(FF_A_UNUSED int sockfd, struct bt_devinfo const* dev, FFlist*
         dev->devname
 #endif
     );
-    ffStrbufInitS(&device->address, bt_ntoa(&dev->bdaddr, NULL));
+    ffStrbufInitS(&device->address, bt_ntoa(&dev->bdaddr, nullptr));
     ffStrbufUpperCase(&device->address);
     ffStrbufInit(&device->type);
     device->battery = 0;
@@ -26,5 +26,5 @@ const char* ffDetectBluetooth(FF_A_UNUSED FFBluetoothOptions* options, FF_A_UNUS
         return "bt_devenum() failed";
     }
 
-    return NULL;
+    return nullptr;
 }

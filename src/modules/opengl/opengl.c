@@ -95,7 +95,7 @@ bool ffGenerateOpenGLJsonResult(FF_A_UNUSED FFOpenGLOptions* options, yyjson_mut
     ffStrbufInit(&result.library);
 
     const char* error = ffDetectOpenGL(options, &result);
-    if (error != NULL) {
+    if (error != nullptr) {
         yyjson_mut_obj_add_str(doc, module, "error", error);
     } else {
         yyjson_mut_val* obj = yyjson_mut_obj_add_obj(doc, module, "result");

@@ -20,7 +20,7 @@ const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* resul
     }
 
     if (info.battery_state == APM_BATTERY_ABSENT) {
-        return NULL;
+        return nullptr;
     }
 
     FFBatteryResult* battery = FF_LIST_ADD(FFBatteryResult, *result);
@@ -56,5 +56,5 @@ const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* resul
         }
     }
 
-    return NULL;
+    return nullptr;
 }

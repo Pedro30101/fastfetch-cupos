@@ -15,12 +15,12 @@ bool ffParseModuleOptions(const char* key, const char* value) {
         return false;
     }
     if (value && !*value) {
-        value = NULL;
+        value = nullptr;
     }
     for (FFModuleBaseInfo** modules = ffModuleInfos[toupper(key[2]) - 'A']; *modules; ++modules) {
         FFModuleBaseInfo* baseInfo = *modules;
         const char* subKey = ffOptionTestPrefix(key, baseInfo->name);
-        if (subKey != NULL) {
+        if (subKey != nullptr) {
             if (subKey[0] == '\0' || subKey[0] == '-') // Key is exactly the module name or has a leading '-'
             {
                 fprintf(stderr, "Error: unknown module key %s\n", key);
@@ -64,7 +64,7 @@ bool ffParseModuleOptions(const char* key, const char* value) {
 }
 
 void ffPrepareCommandOption(FFdata* data) {
-    char* moduleType = NULL;
+    char* moduleType = nullptr;
     size_t moduleLen = 0;
     while (ffStrbufGetdelim(&moduleType, &moduleLen, ':', &data->structure)) {
 #define FF_IF_MODULE_MATCH(moduleNameConstant) if (moduleLen == strlen(moduleNameConstant) && ffStrEqualsIgnCase(moduleType, moduleNameConstant) && !ffStrbufSeparatedContainIgnCaseS(&data->structureDisabled, moduleNameConstant, ':'))
@@ -177,7 +177,7 @@ static bool parseStructureCommand(
             if (ffStrEqualsIgnCase(line, baseInfo->name)) {
                 uint8_t optionBuf[FF_OPTION_MAX_SIZE];
                 baseInfo->initOptions(optionBuf);
-                if (data->resultDoc != NULL) {
+                if (data->resultDoc != nullptr) {
                     fn(data, baseInfo, optionBuf);
                 } else {
                     baseInfo->printModule(optionBuf);
@@ -194,7 +194,7 @@ static bool parseStructureCommand(
         yyjson_mut_obj_add_str(doc, module, "type", line);
         yyjson_mut_obj_add_str(doc, module, "error", "Unknown module type");
     } else {
-        ffPrintError(line, 0, NULL, FF_PRINT_TYPE_NO_CUSTOM_KEY, "<no implementation provided>");
+        ffPrintError(line, 0, nullptr, FF_PRINT_TYPE_NO_CUSTOM_KEY, "<no implementation provided>");
     }
     return false;
 }
@@ -203,7 +203,7 @@ void ffPrintCommandOption(FFdata* data) {
     // Parse the structure and call the modules
     int32_t thres = instance.config.display.stat;
 
-    char* moduleType = NULL;
+    char* moduleType = nullptr;
     size_t moduleLen = 0;
     while (ffStrbufGetdelim(&moduleType, &moduleLen, ':', &data->structure)) {
         if (ffStrbufSeparatedContainIgnCaseS(&data->structureDisabled, moduleType, ':')) {
@@ -249,7 +249,7 @@ void ffMigrateCommandOptionToJsonc(FFdata* data) {
         ffStrbufAppendS(&data->structure, FASTFETCH_DATATEXT_STRUCTURE); // Cannot use `ffStrbufSetStatic` here because we will modify the string
     }
 
-    char* moduleType = NULL;
+    char* moduleType = nullptr;
     size_t moduleLen = 0;
     while (ffStrbufGetdelim(&moduleType, &moduleLen, ':', &data->structure)) {
         if (ffStrbufSeparatedContainIgnCaseS(&data->structureDisabled, moduleType, ':')) {

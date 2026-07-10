@@ -70,5 +70,5 @@ const char* ffDetectHost(FFHostResult* host) {
     ffHostDetectMac(host);
 #endif
 
-    return NULL;
+    return nullptr;
 }

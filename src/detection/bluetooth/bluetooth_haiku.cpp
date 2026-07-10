@@ -11,7 +11,7 @@ const char* ffDetectBluetooth(FF_A_UNUSED FFBluetoothOptions* options, FFlist* d
 
     LocalDevice* dev = LocalDevice::GetLocalDevice();
     if (!dev) {
-        return NULL;
+        return nullptr;
     }
 
     BString devClass;
@@ -26,5 +26,5 @@ const char* ffDetectBluetooth(FF_A_UNUSED FFBluetoothOptions* options, FFlist* d
 
     // TODO: more devices?
 
-    return NULL;
+    return nullptr;
 }

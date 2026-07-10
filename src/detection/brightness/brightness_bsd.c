@@ -69,7 +69,7 @@ const char* detectWithDdcci(FF_A_UNUSED FFBrightnessOptions* options, FFlist* re
         brightness->builtin = false;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 #else
@@ -125,7 +125,7 @@ const char* detectWithBacklight(FF_A_UNUSED FFBrightnessOptions* options, FFlist
             ffStrbufAppendS(&brightness->name, path + strlen("/dev/backlight/"));
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 #else
@@ -143,5 +143,5 @@ const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist*
     if (options->ddcciSleep != FF_BRIGHTNESS_DDCCI_SLEEP_SKIP && result->length == 0) {
         detectWithDdcci(options, result);
     }
-    return NULL;
+    return nullptr;
 }

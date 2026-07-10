@@ -67,7 +67,7 @@ const char* ffJsonConfigParseEnum(yyjson_val* val, int* result, FFKeyValuePair p
         for (const FFKeyValuePair* pPair = pairs; pPair->key; ++pPair) {
             if (intVal == pPair->value) {
                 *result = pPair->value;
-                return NULL;
+                return nullptr;
             }
         }
 
@@ -77,7 +77,7 @@ const char* ffJsonConfigParseEnum(yyjson_val* val, int* result, FFKeyValuePair p
         for (const FFKeyValuePair* pPair = pairs; pPair->key; ++pPair) {
             if (ffStrEqualsIgnCase(strVal, pPair->key)) {
                 *result = pPair->value;
-                return NULL;
+                return nullptr;
             }
         }
 
@@ -244,7 +244,7 @@ static const char* printJsonConfig(FFdata* data, bool prepare) {
 
     yyjson_val* modules = yyjson_obj_get(root, "modules");
     if (!modules) {
-        return NULL;
+        return nullptr;
     }
     if (!yyjson_is_arr(modules)) {
         return "Property 'modules' must be an array of strings or objects";
@@ -263,7 +263,7 @@ static const char* printJsonConfig(FFdata* data, bool prepare) {
         yyjson_val* module = item;
         const char* type = yyjson_get_str(module);
         if (type) {
-            module = NULL;
+            module = nullptr;
         } else if (yyjson_is_obj(module)) {
             yyjson_val* conditions = yyjson_obj_get(module, "condition");
             if (conditions) {
@@ -307,7 +307,7 @@ static const char* printJsonConfig(FFdata* data, bool prepare) {
                 return "module object must contain a \"type\" key ( case sensitive )";
             }
             if (yyjson_obj_size(module) == 1) { // contains only Property type
-                module = NULL;
+                module = nullptr;
             }
         } else {
             return "modules must be an array of strings or objects";
@@ -347,7 +347,7 @@ static const char* printJsonConfig(FFdata* data, bool prepare) {
 #endif
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void ffPrintJsonConfig(FFdata* data, bool prepare) {
@@ -359,7 +359,7 @@ void ffPrintJsonConfig(FFdata* data, bool prepare) {
             yyjson_mut_obj_add_str(jsonDoc, obj, "error", error);
             yyjson_mut_doc_set_root(jsonDoc, obj);
         } else {
-            ffPrintError("JsonConfig", 0, NULL, FF_PRINT_TYPE_NO_CUSTOM_KEY, "%s", error);
+            ffPrintError("JsonConfig", 0, nullptr, FF_PRINT_TYPE_NO_CUSTOM_KEY, "%s", error);
         }
     }
 }

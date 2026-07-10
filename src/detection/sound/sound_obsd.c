@@ -86,5 +86,5 @@ const char* ffDetectSound(FFSoundOptions* options, FFlist* devices) {
     }
     device->volume = (uint8_t) ((totalLevel * 100 + bundle.iLevel / 2) / bundle.iLevel);
 
-    return NULL;
+    return nullptr;
 }

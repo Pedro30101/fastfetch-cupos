@@ -43,7 +43,7 @@ static bool ffCodecIsHardwareAccelerated(
         return false;
     }
 
-    char* codecName = NULL;
+    char* codecName = nullptr;
     media_status_t status = ffAMediaCodec_getName(codec, &codecName);
     if (status != AMEDIA_OK || !codecName) {
         return false;
@@ -98,5 +98,5 @@ const char* ffDetectCodecNative(FFCodecOptions* options, FFlist* result /*list o
         item->platformApi = "AMediaCodec";
     }
 
-    return NULL;
+    return nullptr;
 }

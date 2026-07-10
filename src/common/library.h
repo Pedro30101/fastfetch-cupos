@@ -37,8 +37,8 @@ static inline void ffLibraryUnload(void** handle) {
 
     #define FF_LIBRARY_LOAD(libraryObjectName, returnValue, libraryFileName, maxVersion, ...)                                          \
         void* FF_A_CLEANUP(ffLibraryUnload) libraryObjectName = ffLibraryLoadSingle(libraryFileName, maxVersion);                      \
-        __VA_OPT__(if (__builtin_expect(libraryObjectName == NULL, false)) libraryObjectName = ffLibraryLoadMulti(__VA_ARGS__, NULL);) \
-        if (__builtin_expect(libraryObjectName == NULL, false))                                                                        \
+        __VA_OPT__(if (__builtin_expect(libraryObjectName == nullptr, false)) libraryObjectName = ffLibraryLoadMulti(__VA_ARGS__, nullptr);) \
+        if (__builtin_expect(libraryObjectName == nullptr, false))                                                                        \
             return returnValue;
 
     #define FF_LIBRARY_LOAD_MESSAGE(libraryObjectName, libraryFileName, maxVersion, ...) \
@@ -46,7 +46,7 @@ static inline void ffLibraryUnload(void** handle) {
 
     #define FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, symbolMapping, symbolName, returnValue) \
         symbolMapping = (__typeof__(&symbolName)) dlsym(library, #symbolName);              \
-        if (__builtin_expect(symbolMapping == NULL, false))                                 \
+        if (__builtin_expect(symbolMapping == nullptr, false))                                 \
             return returnValue;
 
     #define FF_LIBRARY_LOAD_SYMBOL(library, symbolName, returnValue) \
@@ -78,7 +78,7 @@ void* ffLibraryLoadMulti(const char* path, int maxVersion, ...);
         __typeof__(&symbolName) ff##symbolName;
 
     #define FF_LIBRARY_LOAD(libraryObjectName, returnValue, ...) \
-        FF_A_UNUSED void* libraryObjectName = NULL; // Placeholder
+        FF_A_UNUSED void* libraryObjectName = nullptr; // Placeholder
 
     #define FF_LIBRARY_LOAD_MESSAGE(libraryObjectName, libraryFileName, maxVersion, ...) \
         FF_LIBRARY_LOAD(libraryObjectName, , libraryFileName, maxVersion, ##__VA_ARGS__)

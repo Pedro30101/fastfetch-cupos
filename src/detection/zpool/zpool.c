@@ -43,7 +43,7 @@ typedef struct FFZfsData {
 static inline void cleanLibzfs(FFZfsData* data) {
     if (data->fflibzfs_fini && data->handle) {
         data->fflibzfs_fini(data->handle);
-        data->handle = NULL;
+        data->handle = nullptr;
     }
 }
 
@@ -118,7 +118,7 @@ const char* ffDetectZpool(FFlist* result /* list of FFZpoolResult */) {
         return "zpool_iter() failed";
     }
 
-    return NULL;
+    return nullptr;
 }
 
 #else

@@ -97,7 +97,7 @@ static const char* tryNonThreadingFastPath(FFNetworkingState* state) {
             },
             1,
             &sent,
-            NULL) != 0) {
+            nullptr) != 0) {
         sent = 0;
     }
     if (fcntl(state->sockfd, F_SETFL, 0) == -1) {
@@ -123,9 +123,9 @@ static const char* tryNonThreadingFastPath(FFNetworkingState* state) {
             sent,
             strerror(errno));
         freeaddrinfo(state->addr);
-        state->addr = NULL;
+        state->addr = nullptr;
         ffStrbufDestroy(&state->command);
-        return NULL;
+        return nullptr;
     }
 
     FF_DEBUG(
@@ -149,7 +149,7 @@ static const char* tryNonThreadingFastPath(FFNetworkingState* state) {
 
 // Traditional connect and send function
 static const char* connectAndSend(FFNetworkingState* state) {
-    const char* ret = NULL;
+    const char* ret = nullptr;
     FF_DEBUG("Using traditional connection method to connect");
 
     FF_DEBUG("Attempting connect() to server...");
@@ -178,7 +178,7 @@ error:
 exit:
     FF_DEBUG("Releasing address info and other resources");
     freeaddrinfo(state->addr);
-    state->addr = NULL;
+    state->addr = nullptr;
     ffStrbufDestroy(&state->command);
 
     return ret;
@@ -212,7 +212,7 @@ static const char* initNetworkingState(FFNetworkingState* state, const char* hos
     FF_DEBUG("Thread ID initialized to 0");
 #endif
 
-    const char* ret = NULL;
+    const char* ret = nullptr;
 
     struct addrinfo hints = {
         .ai_family = state->ipv6 ? AF_INET6 : AF_INET,
@@ -280,14 +280,14 @@ static const char* initNetworkingState(FFNetworkingState* state, const char* hos
 #endif
     }
 
-    return NULL;
+    return nullptr;
 
 error:
     FF_DEBUG("Error occurred during initialization");
-    if (state->addr != NULL) {
+    if (state->addr != nullptr) {
         FF_DEBUG("Releasing address information");
         freeaddrinfo(state->addr);
-        state->addr = NULL;
+        state->addr = nullptr;
     }
 
     if (state->sockfd > 0) {
@@ -307,7 +307,7 @@ const char* ffNetworkingSendHttpRequest(FFNetworkingState* state, const char* ho
 #ifdef FF_HAVE_ZLIB
         const char* zlibError = ffNetworkingLoadZlibLibrary();
         // Only enable compression if zlib library is successfully loaded
-        if (zlibError == NULL) {
+        if (zlibError == nullptr) {
             FF_DEBUG("Successfully loaded zlib library, compression enabled");
         } else {
             FF_DEBUG("Failed to load zlib library, compression disabled: %s", zlibError);
@@ -322,16 +322,16 @@ const char* ffNetworkingSendHttpRequest(FFNetworkingState* state, const char* ho
     }
 
     const char* initResult = initNetworkingState(state, host, path, headers);
-    if (initResult != NULL) {
+    if (initResult != nullptr) {
         FF_DEBUG("Initialization failed: %s", initResult);
         return initResult;
     }
     FF_DEBUG("Network state initialization successful");
 
     const char* tfoResult = tryNonThreadingFastPath(state);
-    if (tfoResult == NULL) {
+    if (tfoResult == nullptr) {
         FF_DEBUG("TryNonThreadingFastPath() succeeded or in progress");
-        return NULL;
+        return nullptr;
     }
     FF_DEBUG("TryNonThreadingFastPath() failed: %s, trying traditional connection", tfoResult);
 
@@ -341,7 +341,7 @@ const char* ffNetworkingSendHttpRequest(FFNetworkingState* state, const char* ho
         state->thread = ffThreadCreate(connectAndSendThreadMain, state);
         if (state->thread) {
             FF_DEBUG("Thread creation successful: thread=%p", (void*) (uintptr_t) state->thread);
-            return NULL;
+            return nullptr;
         }
         FF_DEBUG("Thread creation failed");
     } else {
@@ -455,7 +455,7 @@ const char* ffNetworkingRecvHttpResponse(FFNetworkingState* state, FFstrbuf* buf
                 // Check for Content-Length header to pre-allocate enough memory
                 const char* clHeader = strcasestr(buffer->chars, "Content-Length:");
                 if (clHeader) {
-                    contentLength = (uint32_t) strtoul(clHeader + 15, NULL, 10);
+                    contentLength = (uint32_t) strtoul(clHeader + 15, nullptr, 10);
                     if (contentLength > 0) {
                         FF_DEBUG("Detected Content-Length: %u, pre-allocating buffer", contentLength);
                         // Ensure buffer is large enough, adding header size and some margin
@@ -505,5 +505,5 @@ const char* ffNetworkingRecvHttpResponse(FFNetworkingState* state, FFstrbuf* buf
     }
 #endif
 
-    return NULL;
+    return nullptr;
 }

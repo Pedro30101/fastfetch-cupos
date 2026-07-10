@@ -12,8 +12,8 @@
 
 const char* ffDetectKeyboard(FFlist* devices /* List of FFKeyboardDevice */) {
     UINT nDevices = 0;
-    if (GetRawInputDeviceList(NULL, &nDevices, sizeof(RAWINPUTDEVICELIST))) {
-        return "GetRawInputDeviceList(NULL) failed";
+    if (GetRawInputDeviceList(nullptr, &nDevices, sizeof(RAWINPUTDEVICELIST))) {
+        return "GetRawInputDeviceList(nullptr) failed";
     }
     if (nDevices == 0) {
         return "No HID devices found";
@@ -49,7 +49,7 @@ const char* ffDetectKeyboard(FFlist* devices /* List of FFKeyboardDevice */) {
 
         wchar_t buffer[MAX_PATH];
 
-        HANDLE FF_AUTO_CLOSE_FD hHidFile = CreateFileW(devName, 0 /* must be 0 instead of GENERIC_READ */, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+        HANDLE FF_AUTO_CLOSE_FD hHidFile = CreateFileW(devName, 0 /* must be 0 instead of GENERIC_READ */, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
         if (hHidFile != INVALID_HANDLE_VALUE) {
             if (HidD_GetProductString(hHidFile, buffer, (ULONG) sizeof(buffer))) {
                 ffStrbufSetWS(&device->name, buffer);
@@ -81,5 +81,5 @@ const char* ffDetectKeyboard(FFlist* devices /* List of FFKeyboardDevice */) {
         }
     }
 
-    return NULL;
+    return nullptr;
 }

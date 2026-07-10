@@ -16,7 +16,7 @@ void ffParseBreakJsonObject(FF_A_UNUSED FFBreakOptions* options, FF_A_UNUSED yyj
             continue;
         }
 
-        ffPrintError(FF_BREAK_MODULE_NAME, 0, NULL, FF_PRINT_TYPE_NO_CUSTOM_KEY, "Unknown JSON key %s", unsafe_yyjson_get_str(key));
+        ffPrintError(FF_BREAK_MODULE_NAME, 0, nullptr, FF_PRINT_TYPE_NO_CUSTOM_KEY, "Unknown JSON key %s", unsafe_yyjson_get_str(key));
     }
 }
 

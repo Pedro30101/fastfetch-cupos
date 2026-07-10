@@ -20,7 +20,7 @@ static const char* oglDetectOpenGL(FFOpenGLResult* result) {
     }
     ffOpenGLHandleResult(result, ffglGetString);
     ffStrbufSetStatic(&result->library, "OpenGLKit");
-    return NULL;
+    return nullptr;
 }
 
 const char* ffDetectOpenGL(FFOpenGLOptions* options, FFOpenGLResult* result) {

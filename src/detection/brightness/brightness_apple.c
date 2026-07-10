@@ -27,7 +27,7 @@ extern int DisplayServicesGetBrightness(CGDirectDisplayID display, float* bright
 
 // Works for internal display
 static const char* detectWithDisplayServices(const FFDisplayServerResult* displayServer, FFlist* result) {
-    if (DisplayServicesGetBrightness == NULL) {
+    if (DisplayServicesGetBrightness == nullptr) {
         return "DisplayServices function DisplayServicesGetBrightness is not available";
     }
 
@@ -45,7 +45,7 @@ static const char* detectWithDisplayServices(const FFDisplayServerResult* displa
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 #ifdef __aarch64__
@@ -63,7 +63,7 @@ static const char* detectWithDdcci(FF_A_UNUSED const FFDisplayServerResult* disp
 
     io_registry_entry_t registryEntry;
     while ((registryEntry = IOIteratorNext(iterator)) != IO_OBJECT_NULL) {
-        FF_CFTYPE_AUTO_RELEASE IOAVServiceRef service = NULL;
+        FF_CFTYPE_AUTO_RELEASE IOAVServiceRef service = nullptr;
         {
             FF_IOOBJECT_AUTO_RELEASE io_registry_entry_t entryAv = registryEntry;
 
@@ -118,7 +118,7 @@ static const char* detectWithDdcci(FF_A_UNUSED const FFDisplayServerResult* disp
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 #else
 static IOOptionBits getSupportedTransactionType(void) {
@@ -181,7 +181,7 @@ static const char* detectWithDdcci(const FFDisplayServerResult* displayServer, F
                 }
 
                 uint8_t i2cOut[12] = {};
-                IOI2CConnectRef connect = NULL;
+                IOI2CConnectRef connect = nullptr;
                 if (IOI2CInterfaceOpen(interface, kNilOptions, &connect) != KERN_SUCCESS) {
                     continue;
                 }
@@ -227,7 +227,7 @@ static const char* detectWithDdcci(const FFDisplayServerResult* displayServer, F
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 #endif
 
@@ -240,5 +240,5 @@ const char* ffDetectBrightness(FFBrightnessOptions* options, FFlist* result) {
         detectWithDdcci(displayServer, options, result);
     }
 
-    return NULL;
+    return nullptr;
 }

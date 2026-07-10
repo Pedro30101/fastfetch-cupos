@@ -78,5 +78,5 @@ const char* ffDetectCPUCache(FFCPUCacheResult* result) {
         ffCPUCacheAddItem(result, level, size, 0, type);
     }
 
-    return NULL;
+    return nullptr;
 }

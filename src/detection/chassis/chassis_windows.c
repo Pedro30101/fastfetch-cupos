@@ -50,5 +50,5 @@ const char* ffDetectChassis(FFChassisResult* result) {
     ffCleanUpSmbiosValue(&result->version);
     ffStrbufSetStatic(&result->type, ffChassisTypeToString(data->Type));
 
-    return NULL;
+    return nullptr;
 }

@@ -38,5 +38,5 @@ const char* ffDiskIOGetIoCounters(FFlist* result, FFDiskIOOptions* options) {
         device->writeCount = kio.writes;
     }
 
-    return NULL;
+    return nullptr;
 }

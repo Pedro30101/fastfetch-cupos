@@ -103,7 +103,7 @@ static void waylandKdeEdidListener(void* data, FF_A_UNUSED struct kde_output_dev
 static void waylandKdeEnabledListener(void* data, FF_A_UNUSED struct kde_output_device_v2* _, int32_t enabled) {
     WaylandDisplay* wldata = (WaylandDisplay*) data;
     if (!enabled) {
-        wldata->internal = NULL;
+        wldata->internal = nullptr;
     }
 }
 
@@ -217,7 +217,7 @@ static const char* waylandKdeHandleOutput(WaylandData* wldata, struct wl_proxy* 
     FF_LIST_FOR_EACH (WaylandKdeMode, m, modes) {
         if (m->pMode) {
             wldata->ffwl_proxy_destroy((struct wl_proxy*) m->pMode);
-            m->pMode = NULL;
+            m->pMode = nullptr;
         }
     }
 
@@ -268,14 +268,14 @@ static const char* waylandKdeHandleOutput(WaylandData* wldata, struct wl_proxy* 
     ffStrbufDestroy(&display.name);
     ffStrbufDestroy(&display.edidName);
 
-    return NULL;
+    return nullptr;
 }
 
 const char* ffWaylandHandleKdeOutput(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {
     // TODO: remove this in future versions
     uint32_t bindVersion = min(version, KDE_OUTPUT_DEVICE_V2_PRIORITY_SINCE_VERSION);
-    struct wl_proxy* output = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &kde_output_device_v2_interface, bindVersion, name, kde_output_device_v2_interface.name, bindVersion, NULL);
-    if (output == NULL) {
+    struct wl_proxy* output = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &kde_output_device_v2_interface, bindVersion, name, kde_output_device_v2_interface.name, bindVersion, nullptr);
+    if (output == nullptr) {
         return "Failed to create kde_output_device_v2";
     }
 
@@ -293,8 +293,8 @@ static struct kde_output_device_registry_v2_listener registryListener = {
 
 const char* ffWaylandHandleKdeOutputRegistry(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {
     uint32_t bindVersion = min(version, KDE_OUTPUT_DEVICE_REGISTRY_V2_OUTPUT_SINCE_VERSION);
-    struct wl_proxy* outputRegistry = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &kde_output_device_registry_v2_interface, bindVersion, name, kde_output_device_registry_v2_interface.name, bindVersion, NULL);
-    if (outputRegistry == NULL) {
+    struct wl_proxy* outputRegistry = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &kde_output_device_registry_v2_interface, bindVersion, name, kde_output_device_registry_v2_interface.name, bindVersion, nullptr);
+    if (outputRegistry == nullptr) {
         return "Failed to create kde_output_device_registry_v2";
     }
     if (wldata->ffwl_proxy_add_listener(outputRegistry, (void (**)(void)) &registryListener, wldata) < 0) {
@@ -307,7 +307,7 @@ const char* ffWaylandHandleKdeOutputRegistry(WaylandData* wldata, struct wl_regi
     }
 
     wldata->ffwl_proxy_destroy(outputRegistry);
-    return NULL;
+    return nullptr;
 }
 
 #endif

@@ -82,8 +82,8 @@ FF_A_UNUSED static bool getUbuntuFlavour(FFOSResult* result) {
         ffStrbufClear(&result->version);
         if (ffProcessAppendStdOut(&result->version, (char* const[]) {
                                                         "/usr/bin/lliurex-version",
-                                                        NULL,
-                                                    }) == NULL) { // 8.2.2
+                                                        nullptr,
+                                                    }) == nullptr) { // 8.2.2
             ffStrbufTrimRightSpace(&result->version);
         }
         ffStrbufSetF(&result->prettyName, "LliureX %s", result->version.chars);
@@ -217,8 +217,8 @@ FF_A_UNUSED static bool detectDebianDerived(FFOSResult* result) {
                                                           "--showformat=${version}",
                                                           "--show",
                                                           "pve-manager",
-                                                          NULL,
-                                                      }) == NULL) { // 8.2.2
+                                                          nullptr,
+                                                      }) == nullptr) { // 8.2.2
             ffStrbufTrimRightSpace(&result->versionID);
             ffStrbufSetStatic(&result->prettyName, "Proxmox VE ");
             ffStrbufAppend(&result->prettyName, &result->versionID);
@@ -236,8 +236,8 @@ FF_A_UNUSED static bool detectDebianDerived(FFOSResult* result) {
                                                           "--showformat=${version}",
                                                           "--show",
                                                           "proxmox-backup-server",
-                                                          NULL,
-                                                      }) == NULL) {
+                                                          nullptr,
+                                                      }) == nullptr) {
             ffStrbufTrimRightSpace(&result->versionID);
             ffStrbufSetStatic(&result->prettyName, "Proxmox Backup Server ");
             ffStrbufAppend(&result->prettyName, &result->versionID);

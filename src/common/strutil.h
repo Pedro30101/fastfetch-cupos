@@ -18,7 +18,7 @@ __stdcall char* StrStrIA(const char* lpFirst, const char* lpSrch);
 #define FF_STR(x) FF_STR_INDIR(x)
 
 static inline bool ffStrSet(const char* str) {
-    if (str == NULL) {
+    if (str == nullptr) {
         return false;
     }
 
@@ -69,17 +69,17 @@ static inline bool ffStrEquals(const char* str, const char* compareTo) {
 
 FF_A_ALWAYS_INLINE
 static inline bool ffStrContains(const char* str, const char* compareTo) {
-    return strstr(str, compareTo) != NULL;
+    return strstr(str, compareTo) != nullptr;
 }
 
 FF_A_ALWAYS_INLINE
 static inline bool ffStrContainsIgnCase(const char* str, const char* compareTo) {
-    return strcasestr(str, compareTo) != NULL;
+    return strcasestr(str, compareTo) != nullptr;
 }
 
 FF_A_ALWAYS_INLINE
 static inline bool ffStrContainsC(const char* str, char compareTo) {
-    return strchr(str, compareTo) != NULL;
+    return strchr(str, compareTo) != nullptr;
 }
 
 FF_A_ALWAYS_INLINE
@@ -118,7 +118,7 @@ static inline int8_t ffHexCharToInt(char c) {
 
 // Copies at most (dstBufSiz - 1) bytes from src to dst; dst is always null-terminated
 static inline char* ffStrCopy(char* __restrict__ dst, const char* __restrict__ src, size_t dstBufSiz) {
-    if (__builtin_expect(dst == NULL, false) || dstBufSiz == 0) {
+    if (__builtin_expect(dst == nullptr, false) || dstBufSiz == 0) {
         return dst;
     }
 

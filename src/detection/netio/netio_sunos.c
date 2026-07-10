@@ -33,7 +33,7 @@ const char* ffNetIOGetIoCounters(FFlist* result, FFNetIOOptions* options) {
             continue;
         }
 
-        if (kstat_read(kc, ks, NULL) < 0) {
+        if (kstat_read(kc, ks, nullptr) < 0) {
             continue;
         }
 
@@ -64,5 +64,5 @@ const char* ffNetIOGetIoCounters(FFlist* result, FFNetIOOptions* options) {
         }
     }
 
-    return NULL;
+    return nullptr;
 }

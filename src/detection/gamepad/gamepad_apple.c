@@ -44,5 +44,5 @@ const char* ffDetectGamepad(FFlist* devices /* List of FFGamepadDevice */) {
     }
     IOHIDManagerClose(manager, kIOHIDOptionsTypeNone);
 
-    return NULL;
+    return nullptr;
 }

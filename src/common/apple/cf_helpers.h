@@ -4,7 +4,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 
-// Return error info if failed, NULL otherwise
+// Return error info if failed, nullptr otherwise
 const char* ffCfStrGetString(CFTypeRef cf, FFstrbuf* result);
 const char* ffCfNumGetInt(CFTypeRef cf, int32_t* result);
 const char* ffCfNumGetInt64(CFTypeRef cf, int64_t* result);

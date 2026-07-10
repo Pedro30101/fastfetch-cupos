@@ -84,7 +84,7 @@ static_assert(sizeof(FFSmbiosHeader) == 4, "FFSmbiosHeader should be 4 bytes");
 
 static inline const char* ffSmbiosLocateString(const char* start, uint8_t index /* start from 1 */) {
     if (index == 0 || *start == '\0') {
-        return NULL;
+        return nullptr;
     }
     while (--index) {
         start += strlen(start) + 1;

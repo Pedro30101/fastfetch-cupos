@@ -18,7 +18,7 @@ const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* resul
     }
 
     if (units == 0) {
-        return NULL;
+        return nullptr;
     }
 
     FF_AUTO_CLOSE_FD int acpifd = open("/dev/acpi", O_RDONLY | O_CLOEXEC);
@@ -86,5 +86,5 @@ const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* resul
         }
 #endif
     }
-    return NULL;
+    return nullptr;
 }

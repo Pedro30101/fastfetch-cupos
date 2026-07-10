@@ -30,7 +30,7 @@ const char* ffDetectLocalIps(const FFLocalIpOptions* options, FFlist* results) {
         (int) options->namePrefix.length,
         options->namePrefix.chars);
 
-    IP_ADAPTER_ADDRESSES* FF_AUTO_FREE adapter_addresses = NULL;
+    IP_ADAPTER_ADDRESSES* FF_AUTO_FREE adapter_addresses = nullptr;
 
     // Multiple attempts in case interfaces change while
     // we are in the middle of querying them.
@@ -51,7 +51,7 @@ const char* ffDetectLocalIps(const FFLocalIpOptions* options, FFlist* results) {
         DWORD error = GetAdaptersAddresses(
             family,
             GAA_FLAG_SKIP_ANYCAST | GAA_FLAG_SKIP_MULTICAST | GAA_FLAG_SKIP_DNS_SERVER,
-            NULL,
+            nullptr,
             adapter_addresses,
             &adapter_addresses_buffer_size);
 
@@ -266,5 +266,5 @@ const char* ffDetectLocalIps(const FFLocalIpOptions* options, FFlist* results) {
         processedCount,
         results->length);
 
-    return NULL;
+    return nullptr;
 }

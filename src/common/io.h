@@ -46,7 +46,7 @@ static inline bool ffIsValidNativeFD(FFNativeFD fd) {
     return fd >= 0;
 #else
     // https://devblogs.microsoft.com/oldnewthing/20040302-00/?p=40443
-    return fd != INVALID_HANDLE_VALUE && fd != NULL;
+    return fd != INVALID_HANDLE_VALUE && fd != nullptr;
 #endif
 }
 
@@ -77,7 +77,7 @@ FF_A_NONNULL(3) static inline bool ffWriteFDData(FFNativeFD fd, size_t dataSize,
     return write(fd, data, dataSize) != -1;
 #else
     DWORD written;
-    return WriteFile(fd, data, (DWORD) dataSize, &written, NULL) && written == dataSize;
+    return WriteFile(fd, data, (DWORD) dataSize, &written, nullptr) && written == dataSize;
 #endif
 }
 
@@ -96,7 +96,7 @@ FF_A_NONNULL(3) static inline ssize_t ffReadFDData(FFNativeFD fd, size_t dataSiz
     return read(fd, data, dataSize);
 #else
     DWORD bytesRead;
-    if (!ReadFile(fd, data, (DWORD) dataSize, &bytesRead, NULL)) {
+    if (!ReadFile(fd, data, (DWORD) dataSize, &bytesRead, nullptr)) {
         return -1;
     }
 
@@ -111,7 +111,7 @@ FF_A_NONNULL(1, 3) static inline ssize_t ffReadFileData(const char* fileName, si
 #ifndef _WIN32
         open(fileName, O_RDONLY | O_CLOEXEC);
 #else
-        CreateFileA(fileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        CreateFileA(fileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 #endif
 
     if (!ffIsValidNativeFD(fd)) {
@@ -135,7 +135,7 @@ FF_A_NONNULL(1, 2) static inline bool ffAppendFileBuffer(const char* fileName, F
 #ifndef _WIN32
         open(fileName, O_RDONLY | O_CLOEXEC);
 #else
-        CreateFileA(fileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        CreateFileA(fileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 #endif
 
     if (!ffIsValidNativeFD(fd)) {
@@ -179,7 +179,7 @@ FF_A_NONNULL(1) static inline bool ffPathExists(const char* path, FFPathType pat
 #ifdef _WIN32
 
     wchar_t wPath[MAX_PATH];
-    if (!NT_SUCCESS(RtlUTF8ToUnicodeN(wPath, (ULONG) sizeof(wPath), NULL, path, (ULONG) strlen(path) + 1))) {
+    if (!NT_SUCCESS(RtlUTF8ToUnicodeN(wPath, (ULONG) sizeof(wPath), nullptr, path, (ULONG) strlen(path) + 1))) {
         return false;
     }
 

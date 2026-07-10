@@ -35,5 +35,5 @@ next:
         user->loginTime = (uint64_t) n.ut_time * 1000;
     }
 
-    return NULL;
+    return nullptr;
 }

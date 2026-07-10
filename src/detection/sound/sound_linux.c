@@ -96,9 +96,9 @@ static const char* detectSound(FFSoundOptions* options, FFlist* devices) {
         .result = devices,
         .options = options,
     };
-    const char* error = NULL;
+    const char* error = nullptr;
 
-    if (ffpa_context_connect(context, NULL, PA_CONTEXT_NOFLAGS, NULL) < 0) {
+    if (ffpa_context_connect(context, nullptr, PA_CONTEXT_NOFLAGS, nullptr) < 0) {
         error = "Failed to connect to pulseaudio context";
         goto exit;
     }
@@ -110,7 +110,7 @@ static const char* detectSound(FFSoundOptions* options, FFlist* devices) {
             goto exit;
         }
 
-        ffpa_mainloop_iterate(mainloop, 1, NULL);
+        ffpa_mainloop_iterate(mainloop, 1, nullptr);
     }
 
     {
@@ -120,7 +120,7 @@ static const char* detectSound(FFSoundOptions* options, FFlist* devices) {
             goto exit;
         }
         while (ffpa_operation_get_state(operation) == PA_OPERATION_RUNNING) {
-            ffpa_mainloop_iterate(mainloop, 1, NULL);
+            ffpa_mainloop_iterate(mainloop, 1, nullptr);
         }
 
         ffpa_operation_unref(operation);
@@ -138,7 +138,7 @@ static const char* detectSound(FFSoundOptions* options, FFlist* devices) {
                 ffpa_operation_cancel(operation);
             }
 
-            ffpa_mainloop_iterate(mainloop, 1, NULL);
+            ffpa_mainloop_iterate(mainloop, 1, nullptr);
         }
 
         ffpa_operation_unref(operation);

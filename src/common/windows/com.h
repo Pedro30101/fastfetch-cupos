@@ -16,7 +16,7 @@ static inline void ffReleaseComObject(void* ppUnknown) {
 #else
         pUnknown->lpVtbl->Release(pUnknown);
 #endif
-        *(IUnknown**) ppUnknown = NULL;
+        *(IUnknown**) ppUnknown = nullptr;
     }
 }
 

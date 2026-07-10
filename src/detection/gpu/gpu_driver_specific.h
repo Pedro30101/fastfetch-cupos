@@ -15,7 +15,7 @@ typedef struct FFGpuDriverPciDeviceId {
     uint32_t revId;
 } FFGpuDriverPciDeviceId;
 
-// Use pciBusId if not NULL; use pciDeviceId otherwise
+// Use pciBusId if not nullptr; use pciDeviceId otherwise
 typedef struct FFGpuDriverCondition {
     FFGpuDriverConditionType type;
     FFGpuDriverPciBusId pciBusId;
@@ -23,7 +23,7 @@ typedef struct FFGpuDriverCondition {
     uint64_t luid;
 } FFGpuDriverCondition;
 
-// detect x if not NULL
+// detect x if not nullptr
 typedef struct FFGpuDriverResult {
     uint32_t* index;
     double* temp;
@@ -82,8 +82,8 @@ FF_A_UNUSED static inline bool getDriverSpecificDetectionFn(const char* vendor, 
     }
 #endif
     else {
-        *pDetectFn = NULL;
-        *pDllName = NULL;
+        *pDetectFn = nullptr;
+        *pDllName = nullptr;
         return false;
     }
 

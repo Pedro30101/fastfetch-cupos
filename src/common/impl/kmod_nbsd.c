@@ -10,9 +10,9 @@ typedef struct FF_A_PACKED FFNbsdModList {
 } FFNbsdModList;
 
 bool ffKmodLoaded(const char* modName) {
-    static FFNbsdModList* list = NULL;
+    static FFNbsdModList* list = nullptr;
 
-    if (list == NULL) {
+    if (list == nullptr) {
         struct iovec iov = {};
 
         for (size_t len = 8192;; len = iov.iov_len) {

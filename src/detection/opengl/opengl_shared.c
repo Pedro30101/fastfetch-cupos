@@ -67,7 +67,7 @@ static const char* eglHandleContext(FFOpenGLResult* result, EGLData* data) {
         result->vendor.chars,
         result->slv.chars,
         result->library.chars);
-    return NULL;
+    return nullptr;
 }
 
 static const char* eglHandleSurface(FFOpenGLResult* result, EGLData* data, bool gles) {
@@ -168,8 +168,8 @@ const char* ffOpenGLDetectByEGL(FFOpenGLResult* result) {
     FF_DEBUG("Resolving glGetString via eglGetProcAddress()");
     eglData.ffglGetString = (__typeof__(&glGetString)) ffeglGetProcAddress("glGetString");
     if (!eglData.ffglGetString) {
-        FF_DEBUG("eglGetProcAddress('glGetString') returned NULL");
-        return "eglGetProcAddress(glGetString) returned NULL";
+        FF_DEBUG("eglGetProcAddress('glGetString') returned nullptr");
+        return "eglGetProcAddress(glGetString) returned nullptr";
     }
 
     FF_DEBUG("Loaded EGL library and required symbols");
@@ -184,7 +184,7 @@ const char* ffOpenGLDetectByEGL(FFOpenGLResult* result) {
     }
     if (ffeglGetPlatformDisplay) {
         FF_DEBUG("Trying eglGetPlatformDisplay(EGL_PLATFORM_SURFACELESS_MESA)");
-        display = ffeglGetPlatformDisplay(EGL_PLATFORM_SURFACELESS_MESA, EGL_DEFAULT_DISPLAY, NULL);
+        display = ffeglGetPlatformDisplay(EGL_PLATFORM_SURFACELESS_MESA, EGL_DEFAULT_DISPLAY, nullptr);
         FF_DEBUG("eglGetPlatformDisplay() %s", display == EGL_NO_DISPLAY ? "failed" : "succeeded");
     } else {
         FF_DEBUG("eglGetPlatformDisplay is unavailable, falling back to eglGetDisplay");

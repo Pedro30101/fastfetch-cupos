@@ -18,7 +18,7 @@ const char* ffGetCpuUsageInfo(FFlist* cpuTimes) {
     }
 
     for (int i = 0;; ++i) {
-        kstat_t* ks = kstat_lookup(kc, "cpu_stat", i, NULL);
+        kstat_t* ks = kstat_lookup(kc, "cpu_stat", i, nullptr);
 
         cpu_stat_t cs;
         if (!ks || kstat_read(kc, ks, &cs) < 0) {
@@ -34,5 +34,5 @@ const char* ffGetCpuUsageInfo(FFlist* cpuTimes) {
             .totalAll = total,
         };
     }
-    return NULL;
+    return nullptr;
 }

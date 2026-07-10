@@ -19,13 +19,13 @@ static const char* cglHandleContext(FFOpenGLResult* result, CGLContextObj contex
     CGLGetVersion(&major, &minor);
     ffStrbufSetF(&result->library, "CGL %d.%d", major, minor);
 
-    return NULL;
+    return nullptr;
 }
 
 static const char* cglHandlePixelFormat(FFOpenGLResult* result, CGLPixelFormatObj pixelFormat) {
     CGLContextObj context;
 
-    if (CGLCreateContext(pixelFormat, NULL, &context) != kCGLNoError) {
+    if (CGLCreateContext(pixelFormat, nullptr, &context) != kCGLNoError) {
         return "CGLCreateContext() failed";
     }
 

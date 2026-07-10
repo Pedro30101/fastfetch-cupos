@@ -67,10 +67,10 @@ __attribute__((destructor, no_instrument_function)) void trace_fini() {
 
 #if _WIN32
     SymSetOptions(SYMOPT_DEFERRED_LOADS | SYMOPT_UNDNAME);
-    SymInitialize(NtCurrentProcess(), NULL, TRUE);
+    SymInitialize(NtCurrentProcess(), nullptr, TRUE);
 #endif
 
-    const char* fnName = NULL;
+    const char* fnName = nullptr;
 
     uint32_t count = atomic_load_explicit(&event_count, memory_order_acquire);
     for (uint32_t i = 0; i < count; ++i) {

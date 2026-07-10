@@ -32,5 +32,5 @@ const char* ffDetectMouse(FFlist* devices /* List of FFMouseDevice */) {
     }
     IOHIDManagerClose(manager, kIOHIDOptionsTypeNone);
 
-    return NULL;
+    return nullptr;
 }

@@ -58,7 +58,7 @@ const char* ffDetectBluetoothRadio(FFlist* devices /* FFBluetoothRadioResult */)
     FF_LIBRARY_LOAD_SYMBOL_MESSAGE(bluetoothapis, BluetoothIsConnectable)
     FF_LIBRARY_LOAD_SYMBOL_MESSAGE(bluetoothapis, BluetoothIsDiscoverable)
 
-    HANDLE hRadio = NULL;
+    HANDLE hRadio = nullptr;
     HBLUETOOTH_DEVICE_FIND hFind = ffBluetoothFindFirstRadio(&(BLUETOOTH_FIND_RADIO_PARAMS) {
                                                                  .dwSize = sizeof(BLUETOOTH_FIND_RADIO_PARAMS) },
         &hRadio);
@@ -73,7 +73,7 @@ const char* ffDetectBluetoothRadio(FFlist* devices /* FFBluetoothRadioResult */)
     do {
         BTH_LOCAL_RADIO_INFO blri;
         DWORD returned;
-        if (!DeviceIoControl(hRadio, IOCTL_BTH_GET_LOCAL_INFO, NULL, 0, &blri, sizeof(blri), &returned, NULL)) {
+        if (!DeviceIoControl(hRadio, IOCTL_BTH_GET_LOCAL_INFO, nullptr, 0, &blri, sizeof(blri), &returned, nullptr)) {
             continue;
         }
 
@@ -95,5 +95,5 @@ const char* ffDetectBluetoothRadio(FFlist* devices /* FFBluetoothRadioResult */)
 
     ffBluetoothFindRadioClose(hFind);
 
-    return NULL;
+    return nullptr;
 }

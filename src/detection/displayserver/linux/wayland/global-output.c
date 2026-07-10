@@ -100,8 +100,8 @@ static const struct wp_image_description_info_v1_listener wpImageDescInfoListene
 const char* ffWaylandHandleGlobalOutput(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {
     const char* api = "wayland-base";
     uint32_t bindVersion = min(version, WL_OUTPUT_DESCRIPTION_SINCE_VERSION);
-    struct wl_proxy* output = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &wl_output_interface, bindVersion, name, wl_output_interface.name, bindVersion, NULL);
-    if (output == NULL) {
+    struct wl_proxy* output = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &wl_output_interface, bindVersion, name, wl_output_interface.name, bindVersion, nullptr);
+    if (output == nullptr) {
         return "Failed to create wl_output";
     }
 
@@ -125,7 +125,7 @@ const char* ffWaylandHandleGlobalOutput(WaylandData* wldata, struct wl_registry*
 
     if (wldata->zxdgOutputManager) {
         uint32_t bindVersion = min(version, ZXDG_OUTPUT_V1_DESCRIPTION_SINCE_VERSION);
-        struct wl_proxy* zxdgOutput = wldata->ffwl_proxy_marshal_constructor_versioned(wldata->zxdgOutputManager, ZXDG_OUTPUT_MANAGER_V1_GET_XDG_OUTPUT, &zxdg_output_v1_interface, bindVersion, NULL, output);
+        struct wl_proxy* zxdgOutput = wldata->ffwl_proxy_marshal_constructor_versioned(wldata->zxdgOutputManager, ZXDG_OUTPUT_MANAGER_V1_GET_XDG_OUTPUT, &zxdg_output_v1_interface, bindVersion, nullptr, output);
 
         if (zxdgOutput) {
             wldata->ffwl_proxy_add_listener(zxdgOutput, (void (**)(void)) &zxdgOutputListener, &display);
@@ -137,12 +137,12 @@ const char* ffWaylandHandleGlobalOutput(WaylandData* wldata, struct wl_registry*
 
     if (wldata->wpColorManager) {
         uint32_t bindVersion = min(version, WP_COLOR_MANAGER_V1_GET_OUTPUT_SINCE_VERSION);
-        struct wl_proxy* wpColorOutput = wldata->ffwl_proxy_marshal_constructor_versioned(wldata->wpColorManager, WP_COLOR_MANAGER_V1_GET_OUTPUT, &wp_color_management_output_v1_interface, bindVersion, NULL, output);
+        struct wl_proxy* wpColorOutput = wldata->ffwl_proxy_marshal_constructor_versioned(wldata->wpColorManager, WP_COLOR_MANAGER_V1_GET_OUTPUT, &wp_color_management_output_v1_interface, bindVersion, nullptr, output);
 
         if (wpColorOutput) {
-            struct wl_proxy* wpImageDesc = wldata->ffwl_proxy_marshal_constructor_versioned(wpColorOutput, WP_COLOR_MANAGEMENT_OUTPUT_V1_GET_IMAGE_DESCRIPTION, &wp_image_description_v1_interface, bindVersion, NULL);
+            struct wl_proxy* wpImageDesc = wldata->ffwl_proxy_marshal_constructor_versioned(wpColorOutput, WP_COLOR_MANAGEMENT_OUTPUT_V1_GET_IMAGE_DESCRIPTION, &wp_image_description_v1_interface, bindVersion, nullptr);
             if (wpImageDesc) {
-                struct wl_proxy* wpImageDescInfo = wldata->ffwl_proxy_marshal_constructor_versioned(wpImageDesc, WP_IMAGE_DESCRIPTION_V1_GET_INFORMATION, &wp_image_description_info_v1_interface, bindVersion, NULL);
+                struct wl_proxy* wpImageDescInfo = wldata->ffwl_proxy_marshal_constructor_versioned(wpImageDesc, WP_IMAGE_DESCRIPTION_V1_GET_INFORMATION, &wp_image_description_info_v1_interface, bindVersion, nullptr);
                 if (wpImageDescInfo) {
                     wldata->ffwl_proxy_add_listener(wpImageDescInfo, (void (**)(void)) &wpImageDescInfoListener, &display);
                     wldata->ffwl_display_roundtrip(wldata->display);
@@ -205,31 +205,31 @@ const char* ffWaylandHandleGlobalOutput(WaylandData* wldata, struct wl_registry*
     ffStrbufDestroy(&display.name);
     ffStrbufDestroy(&display.edidName);
 
-    return NULL;
+    return nullptr;
 }
 
 const char* ffWaylandHandleZxdgOutput(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {
     uint32_t bindVersion = min(version, ZXDG_OUTPUT_MANAGER_V1_GET_XDG_OUTPUT_SINCE_VERSION);
-    struct wl_proxy* manager = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &zxdg_output_manager_v1_interface, bindVersion, name, zxdg_output_manager_v1_interface.name, bindVersion, NULL);
-    if (manager == NULL) {
+    struct wl_proxy* manager = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &zxdg_output_manager_v1_interface, bindVersion, name, zxdg_output_manager_v1_interface.name, bindVersion, nullptr);
+    if (manager == nullptr) {
         return "Failed to create zxdg_output_manager_v1";
     }
 
     wldata->zxdgOutputManager = manager;
 
-    return NULL;
+    return nullptr;
 }
 
 const char* ffWaylandHandleWpColor(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {
     uint32_t bindVersion = min(version, WP_COLOR_MANAGER_V1_GET_OUTPUT_SINCE_VERSION);
-    struct wl_proxy* manager = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &wp_color_manager_v1_interface, bindVersion, name, wp_color_manager_v1_interface.name, bindVersion, NULL);
-    if (manager == NULL) {
+    struct wl_proxy* manager = wldata->ffwl_proxy_marshal_constructor_versioned((struct wl_proxy*) registry, WL_REGISTRY_BIND, &wp_color_manager_v1_interface, bindVersion, name, wp_color_manager_v1_interface.name, bindVersion, nullptr);
+    if (manager == nullptr) {
         return "Failed to create wp_color_manager_v1";
     }
 
     wldata->wpColorManager = manager;
 
-    return NULL;
+    return nullptr;
 }
 
 #endif

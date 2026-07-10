@@ -50,7 +50,7 @@ const char* parseBattery(int dfd, const char* battId, FFlist* results) {
         battery->status |= FF_BATTERY_STATUS_AC_CONNECTED;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* results) {
@@ -67,5 +67,5 @@ const char* ffDetectBattery(FF_A_UNUSED FFBatteryOptions* options, FFlist* resul
         parseBattery(dirfd(dir), entry->d_name, results);
     }
 
-    return NULL;
+    return nullptr;
 }

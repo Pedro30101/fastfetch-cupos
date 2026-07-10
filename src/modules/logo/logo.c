@@ -4,7 +4,7 @@
 #include "options/logo.h"
 
 bool ffPrintLogo(FF_A_UNUSED FFLogoOptions* options) {
-    ffPrintError(FF_LOGO_MODULE_NAME, 0, NULL, FF_PRINT_TYPE_DEFAULT, "Supported in JSON format only");
+    ffPrintError(FF_LOGO_MODULE_NAME, 0, nullptr, FF_PRINT_TYPE_DEFAULT, "Supported in JSON format only");
     return false;
 }
 
@@ -16,7 +16,7 @@ void ffParseLogoJsonObject(FF_A_UNUSED FFLogoOptions* options, FF_A_UNUSED yyjso
             continue;
         }
 
-        ffPrintError(FF_LOGO_MODULE_NAME, 0, NULL, FF_PRINT_TYPE_NO_CUSTOM_KEY, "Unknown JSON key %s", unsafe_yyjson_get_str(key));
+        ffPrintError(FF_LOGO_MODULE_NAME, 0, nullptr, FF_PRINT_TYPE_NO_CUSTOM_KEY, "Unknown JSON key %s", unsafe_yyjson_get_str(key));
     }
 }
 

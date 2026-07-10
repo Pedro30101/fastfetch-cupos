@@ -27,7 +27,7 @@ static void printDevice(FFBluetoothRadioOptions* options, const FFBluetoothRadio
                                                                        }));
     }
 
-    const char* version = NULL;
+    const char* version = nullptr;
 
     switch (radio->lmpVersion < 0 ? -radio->lmpVersion : radio->lmpVersion) {
         case 0:

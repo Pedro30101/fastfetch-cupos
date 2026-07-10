@@ -40,5 +40,5 @@ const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist*
         brightness->builtin = true;
     }
 
-    return NULL;
+    return nullptr;
 }

@@ -23,13 +23,13 @@ bool ffListPop(FFlist* list, uint32_t elementSize, void* __restrict result);
 static inline void ffListInit(FFlist* list) {
     list->capacity = 0;
     list->length = 0;
-    list->data = NULL;
+    list->data = nullptr;
 }
 
 static inline void ffListInitA(FFlist* list, uint32_t elementSize, uint32_t capacity) {
     ffListInit(list);
     list->capacity = capacity;
-    list->data = __builtin_expect(capacity == 0, 0) ? NULL : (uint8_t*) malloc((size_t) capacity * elementSize);
+    list->data = __builtin_expect(capacity == 0, 0) ? nullptr : (uint8_t*) malloc((size_t) capacity * elementSize);
 }
 
 FF_A_NODISCARD static inline FFlist ffListCreate() {
@@ -87,7 +87,7 @@ static inline void ffListDestroy(FFlist* list) {
     // Avoid free-after-use. These 3 assignments are cheap so don't remove them
     list->capacity = list->length = 0;
     free(list->data);
-    list->data = NULL;
+    list->data = nullptr;
 }
 
 static inline void ffListClear(FFlist* list) {

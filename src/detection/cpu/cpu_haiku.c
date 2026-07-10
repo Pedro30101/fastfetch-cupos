@@ -11,9 +11,9 @@ const char* ffDetectCPUImpl(FF_A_UNUSED const FFCPUOptions* options, FFCPUResult
     }
 
     uint32 topoNodeCount = 0;
-    get_cpu_topology_info(NULL, &topoNodeCount);
+    get_cpu_topology_info(nullptr, &topoNodeCount);
     if (topoNodeCount == 0) {
-        return "get_cpu_topology_info(NULL) failed";
+        return "get_cpu_topology_info(nullptr) failed";
     }
 
     FF_AUTO_FREE cpu_topology_node_info* topology = malloc(sizeof(*topology) * topoNodeCount);
@@ -64,5 +64,5 @@ const char* ffDetectCPUImpl(FF_A_UNUSED const FFCPUOptions* options, FFCPUResult
     cpu->packages = packages;
     cpu->coresPhysical = cores;
     cpu->coresOnline = cpu->coresLogical = (uint16_t) sysInfo.cpu_count;
-    return NULL;
+    return nullptr;
 }

@@ -48,5 +48,5 @@ const char* ffDetectGPUImpl(FF_A_UNUSED const FFGPUOptions* options, FFlist* gpu
         }
     }
 
-    return NULL;
+    return nullptr;
 }

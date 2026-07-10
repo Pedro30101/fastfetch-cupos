@@ -42,5 +42,5 @@ const char* ffDetectBrightness(FF_A_UNUSED FFBrightnessOptions* options, FFlist*
 
     } while (screen.SetToNext() == B_OK);
 
-    return NULL;
+    return nullptr;
 }

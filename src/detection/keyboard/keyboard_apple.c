@@ -32,5 +32,5 @@ const char* ffDetectKeyboard(FFlist* devices /* List of FFKeyboardDevice */) {
     }
     IOHIDManagerClose(manager, kIOHIDOptionsTypeNone);
 
-    return NULL;
+    return nullptr;
 }

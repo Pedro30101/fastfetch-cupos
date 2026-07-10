@@ -42,5 +42,5 @@ const char* ffDetectBoard(FFBoardResult* board) {
     ffStrbufSetStatic(&board->version, ffSmbiosLocateString(strings, data->Version));
     ffCleanUpSmbiosValue(&board->version);
 
-    return NULL;
+    return nullptr;
 }
