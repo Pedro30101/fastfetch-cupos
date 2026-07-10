@@ -1,18 +1,26 @@
-# 2.65.3
+# 2.66.0
 
 Changes:
+* CPU package count is no longer reported in the default output.
+    * Users can still print it in custom formats via `{packages}`
+
+Bugfixes:
 * Fixed compatibility with WSL 2.9.3 (#2433, WM, Linux)
+* Fixed accurate AMD GPU names are not queried in `driverSpecific` mode (GPU, Linux)
+* Fixed GPU core counting for Apple Silicon GPU on Asahi Linux (GPU, Linux)
+* Some internal cleanups and optimizations
 
 Features:
 * Added Astra Linux version detection (OS, Linux)
 * Improved performance of Windows PowerShell version detection (Shell, Windows)
 * Improved performance of Media module on macOS (Media, macOS)
+* Added proxmox backup server detection (#2443, OS, Linux)
 
 Logos:
 * Added Flatcar, Azure Linux
 * Added Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
 * Updated linuxmint_small
-* Cleaned up a lot of distro names
+* Cleaned up distro names
 
 # 2.65.2
 
