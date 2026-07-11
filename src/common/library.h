@@ -28,10 +28,6 @@ static inline void ffLibraryUnload(void** handle) {
     }
 }
 
-    #if __cplusplus
-        #define __auto_type auto
-    #endif
-
     #define FF_LIBRARY_SYMBOL(symbolName) \
         typeof(&symbolName) ff##symbolName;
 
@@ -50,13 +46,13 @@ static inline void ffLibraryUnload(void** handle) {
             return returnValue;
 
     #define FF_LIBRARY_LOAD_SYMBOL(library, symbolName, returnValue) \
-        __auto_type FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, returnValue);
+        auto FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, returnValue);
 
     #define FF_LIBRARY_LOAD_SYMBOL_LAZY(library, symbolName) \
-        __auto_type ff##symbolName = (typeof(&symbolName)) dlsym(library, #symbolName);
+        auto ff##symbolName = (typeof(&symbolName)) dlsym(library, #symbolName);
 
     #define FF_LIBRARY_LOAD_SYMBOL_MESSAGE(library, symbolName) \
-        __auto_type FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, "dlsym " #symbolName " failed");
+        auto FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, "dlsym " #symbolName " failed");
 
     #define FF_LIBRARY_LOAD_SYMBOL_VAR(library, varName, symbolName, returnValue) \
         FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, (varName).ff##symbolName, symbolName, returnValue);
@@ -87,13 +83,13 @@ void* ffLibraryLoadMulti(const char* path, int maxVersion, ...);
         symbolMapping = (typeof(&symbolName)) &symbolName;
 
     #define FF_LIBRARY_LOAD_SYMBOL(library, symbolName, returnValue) \
-        [[maybe_unused]] __auto_type FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, returnValue);
+        [[maybe_unused]] auto FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, returnValue);
 
     #define FF_LIBRARY_LOAD_SYMBOL_LAZY(library, symbolName) \
-        [[maybe_unused]] __auto_type ff##symbolName = (typeof(&symbolName)) &symbolName;
+        [[maybe_unused]] auto ff##symbolName = (typeof(&symbolName)) &symbolName;
 
     #define FF_LIBRARY_LOAD_SYMBOL_MESSAGE(library, symbolName) \
-        [[maybe_unused]] __auto_type FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, "dlsym " #symbolName " failed");
+        [[maybe_unused]] auto FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, ff##symbolName, symbolName, "dlsym " #symbolName " failed");
 
     #define FF_LIBRARY_LOAD_SYMBOL_VAR(library, varName, symbolName, returnValue) \
         FF_LIBRARY_LOAD_SYMBOL_ADDRESS(library, (varName).ff##symbolName, symbolName, returnValue);

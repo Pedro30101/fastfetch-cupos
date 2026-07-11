@@ -245,14 +245,14 @@ static const char* detectPhysicalDisk(const char* physicalType, const wchar_t* s
             gmt->MediaInfoCount > 0) {
             // DiskInfo and RemovableDiskInfo have the same structures. TapeInfo doesn't.
             if (gmt->DeviceType != FILE_DEVICE_TAPE) {
-                __auto_type diskInfo = &gmt->MediaInfo[0].DeviceSpecific.DiskInfo;
+                auto diskInfo = &gmt->MediaInfo[0].DeviceSpecific.DiskInfo;
                 if (diskInfo->MediaCharacteristics & MEDIA_READ_ONLY) {
                     device->type |= FF_PHYSICALDISK_TYPE_READONLY;
                 } else if (diskInfo->MediaCharacteristics & MEDIA_READ_WRITE) {
                     device->type |= FF_PHYSICALDISK_TYPE_READWRITE;
                 }
             } else {
-                __auto_type tapeInfo = &gmt->MediaInfo[0].DeviceSpecific.TapeInfo;
+                auto tapeInfo = &gmt->MediaInfo[0].DeviceSpecific.TapeInfo;
                 if (tapeInfo->MediaCharacteristics & MEDIA_READ_ONLY) {
                     device->type |= FF_PHYSICALDISK_TYPE_READONLY;
                 } else if (tapeInfo->MediaCharacteristics & MEDIA_READ_WRITE) {
