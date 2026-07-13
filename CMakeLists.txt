@@ -202,6 +202,9 @@ if(LINUX)
     endif()
 endif()
 
+# Minimal compiler version supported: GCC 13 (2023-04-26), Clang 16 (2023-03-17)
+# Most C23 features are allowed with noticeable exceptions of `constexpr` and `#embed`
+# See https://cppreference.com/c/compiler_support/23 for detail
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} -Werror=incompatible-pointer-types -Werror=implicit-function-declaration -Werror=int-conversion")
 
