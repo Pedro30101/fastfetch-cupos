@@ -182,6 +182,26 @@ endif()
 
 set(WARNING_FLAGS "-Wall -Wextra -Wconversion -Werror=uninitialized -Werror=return-type -Werror=vla")
 
+if(LINUX)
+    if(NOT IS_MUSL) # `NOT DEFINED IS_MUSL` doesn't work
+        execute_process(
+            COMMAND ${CMAKE_C_COMPILER} -print-file-name=libc.so
+            OUTPUT_VARIABLE LIBC_PATH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        if(LIBC_PATH MATCHES "-musl")
+            set(IS_MUSL ON CACHE BOOL "Build with musl libc" FORCE)
+        endif()
+    endif()
+
+    if(IS_MUSL)
+        message(STATUS "MUSL libc detected")
+        # Silence ioctl related warnings
+        set(WARNING_FLAGS "${WARNING_FLAGS} -Wno-sign-conversion")
+    endif()
+endif()
+
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} -Werror=incompatible-pointer-types -Werror=implicit-function-declaration -Werror=int-conversion")
 
