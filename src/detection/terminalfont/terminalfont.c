@@ -66,10 +66,10 @@ static void detectAlacritty(FFTerminalFontResult* terminalFont) {
     ffFontInitMoveValues(&terminalFont->font, &fontFamily, &fontSize, &fontStyle);
 }
 
-// Maximum number of `config-file` directives to follow, guarding against runaway includes
-#define FF_GHOSTTY_MAX_CONFIG_FILES 16
-
 static void parseGhosttyConfig(const FFstrbuf* path, FFstrbuf* fontName, FFstrbuf* fontNameFallback, FFstrbuf* fontSize, FFlist* configFiles /* list of FFstrbuf */) {
+    // Maximum number of `config-file` directives to follow, guarding against runaway includes
+    enum { FF_GHOSTTY_MAX_CONFIG_FILES = 16 };
+
     FF_DEBUG("parsing config: %s", path->chars);
 
     FF_STRBUF_AUTO_DESTROY buffer = ffStrbufCreate();
@@ -100,8 +100,7 @@ static void parseGhosttyConfig(const FFstrbuf* path, FFstrbuf* fontName, FFstrbu
             // Doc: https://ghostty.org/docs/config/reference#config-file
             // A leading `?` suppresses errors if the file doesn't exist; missing files are skipped here either way
             ffStrbufTrimLeft(&temp, '?');
-            ffStrbufTrimLeft(&temp, '"');
-            ffStrbufTrimRight(&temp, '"');
+            ffStrbufTrim(&temp, '"');
             if (temp.length == 0) {
                 continue;
             }
