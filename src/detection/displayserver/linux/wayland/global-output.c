@@ -54,19 +54,14 @@ static void handleXdgLogicalSize(void* data, [[maybe_unused]] struct zxdg_output
     }
 }
 
-// Dirty hack for #477
-// The order of these callbacks MUST follow `struct wl_output_listener`
-static void* outputListener[] = {
-    waylandOutputGeometryListener,      // geometry
-    waylandOutputModeListener,          // mode
-    waylandOutputDoneListener,          // done
-    waylandOutputScaleListener,         // scale
-    ffWaylandOutputNameListener,        // name
-    ffWaylandOutputDescriptionListener, // description
+static struct wl_output_listener outputListener = {
+    .geometry = waylandOutputGeometryListener,
+    .mode = waylandOutputModeListener,
+    .done = waylandOutputDoneListener,
+    .scale = waylandOutputScaleListener,
+    .name = (void*) ffWaylandOutputNameListener,
+    .description = (void*) ffWaylandOutputDescriptionListener,
 };
-static_assert(
-    sizeof(outputListener) >= sizeof(struct wl_output_listener),
-    "sizeof(outputListener) is too small. Please report it to fastfetch github issue");
 
 static struct zxdg_output_v1_listener zxdgOutputListener = {
     .logical_position = (void*) stubListener,
