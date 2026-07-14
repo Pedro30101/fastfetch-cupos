@@ -1123,7 +1123,7 @@ elseif(WIN32)
         src/detection/gpu/gpu_windows.cpp
         src/detection/host/host_windows.c
         src/detection/icons/icons_windows.c
-        src/detection/initsystem/initsystem_nosupport.c
+        src/detection/initsystem/initsystem_windows.c
         src/detection/keyboard/keyboard_windows.c
         src/detection/libc/libc_windows.cpp
         src/detection/lm/lm_nosupport.c
