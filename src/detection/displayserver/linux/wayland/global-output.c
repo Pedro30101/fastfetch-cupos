@@ -64,9 +64,9 @@ static struct wl_output_listener outputListener = {
 };
 
 static struct zxdg_output_v1_listener zxdgOutputListener = {
-    .logical_position = (void*) ffWaylandStubListener,
+    .logical_position = (void*) ffUnused,
     .logical_size = handleXdgLogicalSize,
-    .done = (void*) ffWaylandStubListener,
+    .done = (void*) ffUnused,
     .name = (void*) ffWaylandOutputNameListener,
     .description = (void*) ffWaylandOutputDescriptionListener,
 };
@@ -84,17 +84,17 @@ static void handleWpTfNamed(void *data, [[maybe_unused]] struct wp_image_descrip
 }
 
 static const struct wp_image_description_info_v1_listener wpImageDescInfoListener = {
-    .done = (void*) ffWaylandStubListener,
-    .icc_file = (void*) ffWaylandStubListener,
-    .primaries = (void*) ffWaylandStubListener,
-    .primaries_named = (void*) ffWaylandStubListener,
-    .tf_power = (void*) ffWaylandStubListener,
+    .done = (void*) ffUnused,
+    .icc_file = (void*) ffUnused,
+    .primaries = (void*) ffUnused,
+    .primaries_named = (void*) ffUnused,
+    .tf_power = (void*) ffUnused,
     .tf_named = (void*) handleWpTfNamed,
-    .luminances = (void*) ffWaylandStubListener,
-    .target_primaries = (void*) ffWaylandStubListener,
-    .target_luminance = (void*) ffWaylandStubListener,
-    .target_max_cll = (void*) ffWaylandStubListener,
-    .target_max_fall = (void*) ffWaylandStubListener,
+    .luminances = (void*) ffUnused,
+    .target_primaries = (void*) ffUnused,
+    .target_luminance = (void*) ffUnused,
+    .target_max_cll = (void*) ffUnused,
+    .target_max_fall = (void*) ffUnused,
 };
 
 const char* ffWaylandHandleGlobalOutput(WaylandData* wldata, struct wl_registry* registry, uint32_t name, uint32_t version) {

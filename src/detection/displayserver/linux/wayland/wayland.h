@@ -68,8 +68,6 @@ typedef struct WaylandDisplay {
     bool done;
 } WaylandDisplay;
 
-void ffWaylandStubListener(...);
-
 inline static uint64_t ffWaylandGenerateIdFromName(const char* name) {
     uint64_t id = 0;
     size_t len = strlen(name);
