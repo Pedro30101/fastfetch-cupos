@@ -18,6 +18,7 @@ static void detectAlacritty(FFTerminalFontResult* terminalFont) {
     do {
         FFpropquery fontQueryToml[] = {
             { "normal =", &fontNormal },
+            { "family =", &fontFamily },
             { "size =", &fontSize },
         };
 
@@ -34,6 +35,8 @@ static void detectAlacritty(FFTerminalFontResult* terminalFont) {
     } while (false);
 
     if (fontNormal.length > 0) {
+        ffStrbufClear(&fontFamily); // If both `normal` and `family` are specified, `normal` takes precedence
+
         // { family = "Fira Code", style = "Medium" }
         ffStrbufTrimSpace(&fontNormal);
         ffStrbufTrimRight(&fontNormal, '}');
