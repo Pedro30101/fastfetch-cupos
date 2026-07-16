@@ -151,19 +151,6 @@ static const FFlogo M[] = {
         .colorTitle = FF_COLOR_FG_DEFAULT,
     },
     #endif
-    #ifdef FASTFETCH_DATATEXT_LOGO_MAGIX
-    // Magix
-    {
-        .names = { "Magix", "MagixOS" },
-        .lines = FASTFETCH_DATATEXT_LOGO_MAGIX,
-        .colors = {
-            FF_COLOR_FG_LIGHT_MAGENTA,
-            FF_COLOR_FG_CYAN,
-        },
-        .colorKeys = FF_COLOR_FG_CYAN,
-        .colorTitle = FF_COLOR_FG_LIGHT_MAGENTA,
-    },
-    #endif
     #ifdef FASTFETCH_DATATEXT_LOGO_MAGPIEOS
     // MagpieOS
     {
