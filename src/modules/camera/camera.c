@@ -1,7 +1,5 @@
 #include "common/printing.h"
 #include "common/jsonconfig.h"
-#include "common/strutil.h"
-#include "detection/libc/libc.h"
 #include "detection/camera/camera.h"
 #include "modules/camera/camera.h"
 
