@@ -7,7 +7,7 @@ void ffBase64EncodeRaw(uint32_t size, const char* str, uint32_t* out_size, char*
     const char* ends = str + (size - size % 3);
     while (str != ends) {
         uint32_t n = *(uint32_t*) str;
-        #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+        #if !__BIG_ENDIAN__
         // The 3 input bytes must be laid out big-endian (str[0] in the most
         // significant position). On little-endian hosts swap; on big-endian
         // hosts the word is already in the right order.
